@@ -14,8 +14,8 @@ import {MatListModule} from '@angular/material/list';
     Layout,
     // BrowserModule,
     // BrowserAnimationsModule,
-    //MatCardModule,
-    //MatListModule
+    MatCardModule,
+    MatListModule
   ],
   templateUrl: './app.html',
   styleUrl: './app.css'
