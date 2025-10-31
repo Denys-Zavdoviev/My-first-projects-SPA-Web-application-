@@ -8,4 +8,5 @@ import { Component } from '@angular/core';
 })
 export class Header {
   text_header = 'Домашні тварини'
+  // text_header = 'Homes '
 }

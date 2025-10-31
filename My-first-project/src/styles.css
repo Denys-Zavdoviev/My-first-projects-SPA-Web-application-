@@ -1,1 +1,36 @@
-/* You can add global styles to this file, and also import other style files */
+@import
+url('../Style-Fonts/Bauhaus/bauhaus.css');
+
+@import
+url('https://fonts.googleapis.com/css2?family=Concert+One&family=Montserrat:ital,wght@0,100..900;1,100..900&display=swap');
+
+*{
+  margin: 0;
+  padding: 0;
+  border: 0;
+  /*box-sizing: border-box;*/
+}
+:focus,:active{outline:none;}/* Зняття виділення при фокусі і активності */
+a:focus,a:active{outline:none;}/* Зняття виділення для посилань при фокусі і активності */
+button{cursor:pointer;}/* Вказання курсору для кнопок */
+button::-moz-focus-inner{padding:0;border:0;}/* Видалення внутрішнього відступу і границі для кнопок у Firefox */
+img{vertical-align:top;}/* Вертикальне вирівнювання зображень вверх */
+a,a:visited{text-decoration:none;}/* Зняття підкреслення для посилань */
+a:hover{text-decoration:none;}/* Вказання кольору тла для списку без маркера */
+ul li{list-style:none;}/* Вертикальне вирівнювання зображень вверх */
+
+body {
+  font-family: 'Roboto', sans-serif;
+  overflow-y:scroll;
+  font-size: 18px;
+}
+
+h1, h2,h3,h4,h5,h6{
+  font-family: Bauhaus;
+  font-style: normal;
+  line-height: normal;
+  color: #231a00;
+}
+
+html, body { height: 100%; }
+body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
