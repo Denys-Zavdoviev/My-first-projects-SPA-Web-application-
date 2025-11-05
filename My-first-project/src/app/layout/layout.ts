@@ -9,5 +9,5 @@ import {Footer} from '../footer/footer';
   styleUrl: './layout.css',
 })
 export class Layout {
-
+  public list_nav: string[] = ["Розділ 1", "Розділ 2", "Розділ 3"];
 }

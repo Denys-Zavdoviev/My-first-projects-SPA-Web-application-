@@ -1,12 +1,15 @@
-import { Component } from '@angular/core';
+import { Component, Input  } from '@angular/core';
+import {NgFor} from '@angular/common';
 
 @Component({
   selector: 'app-header',
-  imports: [],
+  standalone: true,
+  imports: [NgFor],
   templateUrl: './header.html',
   styleUrl: './header.css',
 })
 export class Header {
-  text_header = 'Домашні тварини'
-  // text_header = 'Homes '
+  @Input() navItems: string[] = [];
+
+  text_header:string = 'Домашні тварини';
 }

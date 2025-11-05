@@ -1,1 +1,32 @@
-<div class="foot">{{text_footer}}</div>
+<div class="foot">
+  <div class="foot-info">
+    <div class="box-logo">
+      <img src="/img/Logo.png" alt="Logo" class="logo-img">
+      <div class="list-nav">
+        <a *ngFor="let item of footerItems" href="#">
+          {{item}}
+        </a>
+      </div>
+    </div>
+      <div class="foot-feedback-box">
+        <h3 class="foot-feedback-title">
+          {{title_link}}
+        </h3>
+        <div class="foot-feedback-link">
+          <a href="#">
+            <img src="/img/velope.png" alt="пошта">
+          </a>
+          <a href="#">
+            <img src="/img/icons8-facebook-f.svg" alt="фейсбук">
+          </a>
+          <a href="#">
+            <img src="/img/icons9-instagram.png" alt="інтса">
+          </a>
+          <a href="#">
+            <img src="/img/Vector.svg" alt="ютуб">
+          </a>
+        </div>
+      </div>
+  </div>
+  <p class="cop">{{text_footer}}</p>
+</div>
