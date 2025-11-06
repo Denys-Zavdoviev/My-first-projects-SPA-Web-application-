@@ -13,5 +13,5 @@ export interface Beast {
   imageUrl?: string; //зображення
   lifespan?: number; // середня тривалість життя (необов'язково)
   diet: DietType; // "хижак", "травоїдний", "всеїдний"
-  comment: string; //коментар від кота
+  sound: string; //звучання тварини
 }

@@ -1,0 +1,35 @@
+.card{
+  margin: 0px 25px;
+  padding: 15px 20px;
+  height: max-content;
+  min-width: 300px;
+  max-width: 550px;
+  background: #f2d19b;
+  border: #633d01 5px solid;
+  border-radius: 8px;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  gap: 10px;
+}
+.card p{
+  font-size: 18px;
+  color: #492b00;
+  word-break: break-all;
+}
+
+.pet_img{
+  border-radius: 8px;
+  height: 450px;
+}
+
+.card-comm{
+  padding: 0px 0px 0px 8px;
+  border-left: #633d01 5px solid;
+  font-size: 18px;
+  color: #492b00;
+  word-break: normal;
+  white-space: pre-line;
+  /*line-height: 1;*/
+  font-style: italic;
+}
