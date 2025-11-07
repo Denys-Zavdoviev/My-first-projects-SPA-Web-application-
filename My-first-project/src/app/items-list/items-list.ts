@@ -40,7 +40,7 @@ export class ItemsList {
     `${this.Pet_Card[1].sound}!
     Мене звати ${this.Pet_Card[1].name}.
     Я люблю гуляти зі своїми господарями. А ще люблю коли мене годують.
-    В мене є друг ${this.Pet_Card[0].sound} ${this.Pet_Card[1].sound}`
+    В мене є друг ${this.Pet_Card[0].name}, ${this.Pet_Card[1].sound}`
   ];
 
 }
