@@ -1,10 +1,10 @@
 import {Component, Input} from '@angular/core';
 import {Beast, DietType} from '../shared/models/beasts.model';
-import {NgFor, NgIf} from '@angular/common';
+import {NgClass, NgFor, NgIf, NgStyle} from '@angular/common';
 
 @Component({
   selector: 'app-item-card',
-  imports: [NgFor, NgIf],
+  imports: [NgFor, NgIf, NgStyle,NgClass],
   templateUrl: './item-card.html',
   styleUrl: './item-card.css',
 })

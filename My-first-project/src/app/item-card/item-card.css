@@ -5,10 +5,6 @@
   min-width: 300px;
   max-width: 550px;
   background-color: #f2d19b;
-  background-image: url("/img/Card-Pet/лапки.png");
-  background-size: 150px 150px;
-  background-repeat: repeat;
-  background-position: center;
   border: #633d01 5px solid;
   border-radius: 8px;
   display: flex;
