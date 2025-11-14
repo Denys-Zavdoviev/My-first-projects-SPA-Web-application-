@@ -17,7 +17,7 @@ export interface Beast {
   type: string; //тип кіт собака і тд
   breed?: string; // Порода (якщо є)
   imageUrl?: string; //зображення
-  lifespan?: number; // середня тривалість життя (необов'язково)
-  diet: DietType; // хижак, травоїдний, всеїдний
+  // lifespan?: number; // середня тривалість життя (необов'язково)
+  // diet: DietType; // хижак, травоїдний, всеїдний
   sound?: string; //звучання тварини
 }

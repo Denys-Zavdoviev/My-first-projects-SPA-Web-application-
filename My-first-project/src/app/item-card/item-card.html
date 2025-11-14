@@ -8,7 +8,7 @@
   <div class="card-info">
     <img [src]="pet.imageUrl ? pet.imageUrl : '../img/Card-Pet/default.jpg'"
          alt="" class="pet_img">
-    <h2>{{pet.name}}</h2>
+    <h2 *ngIf = "pet.name">{{pet.name}}</h2>
     <p class="pet_age">Вік: {{pet.ageNum}} {{pet.ageYMD}}</p>
     <p class="pet_type"> Вид: {{pet.type}}</p>
     <p class="pet_breed" *ngIf = "pet.breed">Порода: {{pet.breed}}</p>

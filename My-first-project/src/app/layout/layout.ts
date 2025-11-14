@@ -2,10 +2,11 @@ import { Component } from '@angular/core';
 import {Header} from '../header/header';
 import {Footer} from '../footer/footer';
 import {ItemsList} from '../items-list/items-list';
+import {Search} from '../search/search';
 
 @Component({
   selector: 'app-layout',
-  imports: [Header, Footer, ItemsList],
+  imports: [Header, Footer, ItemsList, Search],
   templateUrl: './layout.html',
   styleUrl: './layout.css',
 })

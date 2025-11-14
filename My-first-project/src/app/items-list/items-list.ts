@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, Input } from '@angular/core';
 import {ItemCard} from '../item-card/item-card';
 import {ageType, Beast, DietType} from '../shared/models/beasts.model';
 import {NgFor, NgIf} from '@angular/common';
@@ -18,8 +18,8 @@ export class ItemsList {
       type: 'Кіт', //тип кіт собака і тд
       breed: 'Раґамаффін', // Порода (якщо є)
       imageUrl: '/img/Card-Pet/Боря.jpg', //зображення
-      lifespan: 18, // середня тривалість життя (необов'язково)
-      diet:  DietType.Omnivore, // "хижак", "травоїдний", "всеїдний"
+      // lifespan: 18, // середня тривалість життя (необов'язково)
+      // diet:  DietType.Omnivore, // "хижак", "травоїдний", "всеїдний"
       sound: 'Мяф' //коментар від кота
     },
     {  id: 1,
@@ -29,8 +29,8 @@ export class ItemsList {
       type: 'Собака',
       breed: 'Бернський зенненхунд',
       imageUrl: '/img/Card-Pet/Вольт.jpg',
-      lifespan: 10,
-      diet:  DietType.Omnivore,
+      // lifespan: 10,
+      // diet:  DietType.Omnivore,
       sound: 'Гаф'
     },
     {  id: 2,
@@ -40,8 +40,8 @@ export class ItemsList {
       type: 'Ворон',
       breed: '',
       imageUrl: '',
-      lifespan: 10,
-      diet:  DietType.Omnivore,
+      // lifespan: 10,
+      // diet:  DietType.Omnivore,
       sound: 'Каар'
     }
   ];
