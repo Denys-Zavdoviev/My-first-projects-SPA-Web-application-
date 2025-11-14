@@ -70,8 +70,13 @@ export class ItemsList {
     this.selectedFilter = value;
   }
   get filteredPets(){
-    return this.selectedFilter === 'Всі'
-      ? this.Pet_Card
-      : this.Pet_Card.filter(beast => beast.type === this.selectedFilter);
+    if (this.selectedFilter === 'Всі') {
+      console.log('Якщо Всі: ', this.selectedFilter);
+      return this.Pet_Card;
+    } else {
+      console.log('Якщо Тип: ', this.selectedFilter);
+      return this.Pet_Card.filter(beast => beast.type === this.selectedFilter);
+    }
+
   }
 }

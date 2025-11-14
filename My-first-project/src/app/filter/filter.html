@@ -1,11 +1,12 @@
 <div class="">
-  <h5>Фільтр</h5>
+  <h5>Фільтр список</h5>
   <form>
     <div class="">
       <select class=""
               [(ngModel)]="selectedFilter"
-              (change)="onSelectedFilterChanged()">
-        <option value="Всі">
+              (change)="onSelectedFilterChanged()"
+              name="filterSelect">
+        <option [value]="'Всі'">
           Всі ({{ all }})
         </option>
         <option *ngFor="let type of uniqueTypes" [value]="type">
@@ -15,3 +16,32 @@
     </div>
   </form>
 </div>
+
+<!--<div class="">-->
+<!--  <h5>Фільтр радіо кнопки</h5>-->
+<!--  <form>-->
+<!--    <div class="" *ngIf="uniqueTypes.length">-->
+<!--      <label>-->
+<!--        <input-->
+<!--          type="radio"-->
+<!--          name="filterGroup"-->
+<!--          [(ngModel)]="selectedFilter"-->
+<!--          [value]="'Всі'"-->
+<!--          (change)="onSelectedFilterChanged()" />-->
+<!--        Всі ({{ all }})-->
+<!--      </label>-->
+
+<!--      <div *ngFor="let type of uniqueTypes">-->
+<!--        <label>-->
+<!--          <input-->
+<!--            type="radio"-->
+<!--            name="filterGroup"-->
+<!--            [(ngModel)]="selectedFilter"-->
+<!--            [value]="type"-->
+<!--            (change)="onSelectedFilterChanged()" />-->
+<!--          {{ type }} ({{ getTypeCount(type) }})-->
+<!--        </label>-->
+<!--      </div>-->
+<!--    </div>-->
+<!--  </form>-->
+<!--</div>-->

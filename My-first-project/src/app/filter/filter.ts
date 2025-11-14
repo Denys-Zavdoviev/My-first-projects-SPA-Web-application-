@@ -9,6 +9,7 @@ import {NgFor, NgIf} from '@angular/common';
   templateUrl: './filter.html',
   styleUrl: './filter.css',
 })
+
 export class Filter {
     @Input() all: number = 0;
     @Input() typePets: Beast[] = [];
@@ -18,7 +19,9 @@ export class Filter {
     return this.typePets.filter(p => p.type === type).length;
   }
   get uniqueTypes(): string[] {
-    return Object.values(beastType).map(t => t.toString());
+    return Object.values(beastType);
+    // return ['Кіт', 'Собака', 'Риба', 'Ворон', 'Ящірка', 'Слимак', 'Краб', 'Змія'];
+
   }
   selectedFilter: string= 'Всі';
 
@@ -27,3 +30,4 @@ export class Filter {
       this.selectedFilterChanged.emit(this.selectedFilter);
   }
 }
+
