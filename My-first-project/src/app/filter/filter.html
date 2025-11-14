@@ -1,0 +1,35 @@
+<div class="">
+  <h5>Фільтр</h5>
+  <form>
+    <div class="">
+      <div class="">
+        <input
+          class="form-check-input"
+          type="radio"
+          id="showAll"
+          name="bookFilter"
+          value="all"
+          [(ngModel)]="selectedFilter"
+          (change)="onSelectedFilterChanged()"
+        />
+        <label class="form-check-label" for="showAll">
+          {{ 'All (' + all + ')' }}
+        </label>
+      </div>
+
+      <div class="select-type">
+        <select
+          class="form-select w-auto"
+          [(ngModel)]="selectedFilter"
+          (change)="onSelectedFilterChanged()"
+        >
+          <option *ngFor="let type of uniqueTypes" [value]="type">
+            {{ type }} ({{ typeCounts[type] || 0}})
+          </option>
+        </select>
+      </div>
+    </div>
+
+  </form>
+</div>
+

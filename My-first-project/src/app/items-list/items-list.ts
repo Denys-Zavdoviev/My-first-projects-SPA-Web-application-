@@ -2,10 +2,12 @@ import { Component, Input } from '@angular/core';
 import {ItemCard} from '../item-card/item-card';
 import {ageType, Beast, DietType} from '../shared/models/beasts.model';
 import {NgFor, NgIf} from '@angular/common';
+import {Search} from '../search/search';
+import {Filter} from '../filter/filter';
 
 @Component({
   selector: 'app-items-list',
-  imports: [ItemCard, NgFor, NgIf],
+  imports: [ItemCard, NgFor, NgIf, Search, Filter],
   templateUrl: './items-list.html',
   styleUrl: './items-list.css',
 })
@@ -58,4 +60,28 @@ export class ItemsList {
     `${this.Pet_Card[2].sound}! Я надто швидкий для камери.`
   ];
 
+  selectedFilter: string = 'all';
+
+  getAllPets(){
+    return this.Pet_Card.length;
+  }
+  get typeCounts(): { [key: string]: number } {
+    const counts: { [key: string]: number } = {};
+    this.Pet_Card.forEach(pet => {
+      counts[pet.type] = (counts[pet.type] || 0) + 1;
+    });
+    return counts;
+  }
+  get uniqueTypes(): string[] {
+    return [...new Set(this.Pet_Card.map(b => b.type))];
+  }
+  getselectedFilter(value:string){
+    this.selectedFilter = value;
+  }
+
+  get filteredPets(){
+    return this.selectedFilter === 'all'
+      ? this.Pet_Card
+      : this.Pet_Card.filter(beast => beast.type === this.selectedFilter);
+  }
 }

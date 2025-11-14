@@ -3,10 +3,11 @@ import {Header} from '../header/header';
 import {Footer} from '../footer/footer';
 import {ItemsList} from '../items-list/items-list';
 import {Search} from '../search/search';
+import {Filter} from '../filter/filter';
 
 @Component({
   selector: 'app-layout',
-  imports: [Header, Footer, ItemsList, Search],
+  imports: [Header, Footer, ItemsList],
   templateUrl: './layout.html',
   styleUrl: './layout.css',
 })
