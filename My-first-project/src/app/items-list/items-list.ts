@@ -60,16 +60,17 @@ export class ItemsList {
     `${this.Pet_Card[2].sound}! Я надто швидкий для камери.`
   ];
 
-  selectedFilter: string = 'all';
-
   getAllPets(){
     return this.Pet_Card.length;
   }
-  getselectedFilter(value: string | beastType) {
+  selectedFilter: string = 'Всі';
+
+  getselectedFilter(value: string) {
+    console.log('Вибраний тип у ItemsList:', value);
     this.selectedFilter = value;
   }
   get filteredPets(){
-    return this.selectedFilter === 'all'
+    return this.selectedFilter === 'Всі'
       ? this.Pet_Card
       : this.Pet_Card.filter(beast => beast.type === this.selectedFilter);
   }

@@ -5,11 +5,11 @@
       <select class=""
               [(ngModel)]="selectedFilter"
               (change)="onSelectedFilterChanged()">
-        <option [ngValue]="all">
+        <option value="Всі">
           Всі ({{ all }})
         </option>
-        <option *ngFor="let type of uniqueTypes" [ngValue]="type">
-          {{ type }} ({{ getTypeCount(type) }})
+        <option *ngFor="let type of uniqueTypes" [value]="type">
+         {{ type }} ({{ getTypeCount(type) }})
         </option>
       </select>
     </div>

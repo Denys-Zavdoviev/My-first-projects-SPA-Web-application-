@@ -1,10 +1,11 @@
 import {Component, Output, Input, EventEmitter} from '@angular/core';
 import {FormsModule} from '@angular/forms';
 import {ageType, Beast, beastType, DietType} from '../shared/models/beasts.model';
+import {NgFor, NgIf} from '@angular/common';
 
 @Component({
   selector: 'app-filter',
-  imports: [FormsModule],
+  imports: [FormsModule, NgFor, NgIf],
   templateUrl: './filter.html',
   styleUrl: './filter.css',
 })
@@ -13,17 +14,16 @@ export class Filter {
     @Input() typePets: Beast[] = [];
     @Output() selectedFilterChanged: EventEmitter<string> = new EventEmitter<string>();
 
-    selectedFilter: string | beastType = 'all';
+  getTypeCount(type: string): number {
+    return this.typePets.filter(p => p.type === type).length;
+  }
+  get uniqueTypes(): string[] {
+    return Object.values(beastType).map(t => t.toString());
+  }
+  selectedFilter: string= 'Всі';
 
-    onSelectedFilterChanged(){
+  onSelectedFilterChanged(){
+      console.log('Вибраний тип:', this.selectedFilter);
       this.selectedFilterChanged.emit(this.selectedFilter);
-    }
-
-    get uniqueTypes(): string[] {
-      return Object.values(beastType);
-    }
-
-    getTypeCount(type: beastType): number {
-      return this.typePets.filter(p => p.type === type).length;
-    }
+  }
 }
