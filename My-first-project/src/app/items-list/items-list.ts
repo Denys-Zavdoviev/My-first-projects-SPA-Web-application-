@@ -1,6 +1,6 @@
 import { Component, Input } from '@angular/core';
 import {ItemCard} from '../item-card/item-card';
-import {ageType, Beast, DietType} from '../shared/models/beasts.model';
+import {ageType, Beast, beastType, DietType} from '../shared/models/beasts.model';
 import {NgFor, NgIf} from '@angular/common';
 import {Search} from '../search/search';
 import {Filter} from '../filter/filter';
@@ -17,7 +17,7 @@ export class ItemsList {
       name: 'Боря', //ім'я тварини
       ageNum: 9, //вік
       ageYMD: ageType.Years,
-      type: 'Кіт', //тип кіт собака і тд
+      type: beastType.Cat, //тип кіт собака і тд
       breed: 'Раґамаффін', // Порода (якщо є)
       imageUrl: '/img/Card-Pet/Боря.jpg', //зображення
       // lifespan: 18, // середня тривалість життя (необов'язково)
@@ -28,7 +28,7 @@ export class ItemsList {
       name: 'Вольт',
       ageNum: 3,
       ageYMD: ageType.Years,
-      type: 'Собака',
+      type: beastType.Dog,
       breed: 'Бернський зенненхунд',
       imageUrl: '/img/Card-Pet/Вольт.jpg',
       // lifespan: 10,
@@ -39,7 +39,7 @@ export class ItemsList {
       name: 'Арон',
       ageNum: 5,
       ageYMD: ageType.Months,
-      type: 'Ворон',
+      type: beastType.Raven,
       breed: '',
       imageUrl: '',
       // lifespan: 10,
@@ -65,20 +65,9 @@ export class ItemsList {
   getAllPets(){
     return this.Pet_Card.length;
   }
-  get typeCounts(): { [key: string]: number } {
-    const counts: { [key: string]: number } = {};
-    this.Pet_Card.forEach(pet => {
-      counts[pet.type] = (counts[pet.type] || 0) + 1;
-    });
-    return counts;
-  }
-  get uniqueTypes(): string[] {
-    return [...new Set(this.Pet_Card.map(b => b.type))];
-  }
-  getselectedFilter(value:string){
+  getselectedFilter(value: string | beastType) {
     this.selectedFilter = value;
   }
-
   get filteredPets(){
     return this.selectedFilter === 'all'
       ? this.Pet_Card

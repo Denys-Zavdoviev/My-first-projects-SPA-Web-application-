@@ -1,10 +1,9 @@
 <app-search></app-search>
 <app-filter
   [all] = "getAllPets()"
-  [types] = "uniqueTypes"
-  [typeCounts]="typeCounts"
-  (selectedFilterChanged) = "getselectedFilter($event)"
-></app-filter>
+  [typePets] = "Pet_Card"
+  (selectedFilterChanged) = "getselectedFilter($event)">
+</app-filter>
 <div>
   <app-item-card *ngFor="let pet of filteredPets; let i = index"
                  [pet]="pet"
