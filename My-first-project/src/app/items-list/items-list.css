@@ -1,4 +1,14 @@
-div{
+.search-filter{
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-start;
+  align-items: center;
+  gap: 25px;
+
+  /*border-radius: 8px;*/
+}
+
+.list-cards{
   display: flex;
   flex-direction: row;
   flex-wrap: wrap;

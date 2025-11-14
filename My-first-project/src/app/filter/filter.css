@@ -1,0 +1,19 @@
+.box-filter{
+  background: #f4d39c;
+  margin: -20px 0px 25px 0px;
+  padding: 20px 25px 20px 80px;
+  border-top: #633d01 5px solid;
+  border-bottom: #633d01 5px solid;
+  border-right: #633d01 5px solid;
+}
+form select{
+  margin: 10px 0px;
+  font-size: 18px;
+}
+.box-select{
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-start;
+  align-items: center;
+  gap: 12px;
+}
