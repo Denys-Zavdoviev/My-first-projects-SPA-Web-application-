@@ -30,6 +30,7 @@ export interface Beast {
   breed?: string; // Порода (якщо є)
   imageUrl?: string; //зображення
   sound?: string; //звучання тварини
-  // lifespan?: number; // середня тривалість життя (необов'язково)
-  // diet: DietType; // хижак, травоїдний, всеїдний
+  liketoy?: string; // улюбоена іграшка
+  diet?: DietType; // хижак, травоїдний, всеїдний
+  imgback?: string; // фонове зображення
 }

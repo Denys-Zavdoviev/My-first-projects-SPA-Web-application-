@@ -20,9 +20,10 @@ export class ItemsList {
       type: beastType.Cat, //тип кіт собака і тд
       breed: 'Раґамаффін', // Порода (якщо є)
       imageUrl: '/img/Card-Pet/Боря.jpg', //зображення
-      // lifespan: 18, // середня тривалість життя (необов'язково)
-      // diet:  DietType.Omnivore, // "хижак", "травоїдний", "всеїдний"
-      sound: 'Мяф' //коментар від кота
+      liketoy: 'Нерви хозяїна', // середня тривалість життя (необов'язково)
+      diet:  DietType.Omnivore, // "хижак", "травоїдний", "всеїдний"
+      sound: 'Мяф', //коментар від кота
+      imgback: '/img/Card-Pet/лапки65.png'
     },
     {  id: 1,
       name: 'Вольт',
@@ -31,9 +32,10 @@ export class ItemsList {
       type: beastType.Dog,
       breed: 'Бернський зенненхунд',
       imageUrl: '/img/Card-Pet/Вольт.jpg',
-      // lifespan: 10,
-      // diet:  DietType.Omnivore,
-      sound: 'Гаф'
+      liketoy: "М'ячик",
+      diet:  DietType.Omnivore,
+      sound: 'Гаф',
+      imgback: '/img/Card-Pet/Кістки65.png'
     },
     {  id: 2,
       name: 'Арон',
@@ -42,9 +44,10 @@ export class ItemsList {
       type: beastType.Raven,
       breed: '',
       imageUrl: '',
-      // lifespan: 10,
-      // diet:  DietType.Omnivore,
-      sound: 'Каар'
+      liketoy: '',
+      diet:  DietType.Omnivore,
+      sound: 'Каар',
+      imgback: ''
     }
   ];
   public Pet_Comm: string[] = [
@@ -61,13 +64,13 @@ export class ItemsList {
   ];
 
   @Output()
-  selectedPetEvent: EventEmitter<Beast> = new EventEmitter<Beast>();
-
-  selectedPet!: Beast;
+  selectedPetEvent = new EventEmitter<{ pet: Beast, comment: string }>();
 
   onSelectedPet(pet: Beast) {
-    this.selectedPet = pet;
-    this.selectedPetEvent.emit(this.selectedPet);
+    this.selectedPetEvent.emit({
+      pet: pet,
+      comment: this.Pet_Comm[pet.id]
+    });
   }
 
   getAllPets(){
@@ -81,10 +84,10 @@ export class ItemsList {
   }
   get filteredPets(){
     if (this.selectedFilter === 'Всі') {
-      console.log('Якщо Всі: ', this.selectedFilter);
+      // console.log('Якщо Всі: ', this.selectedFilter);
       return this.Pet_Card;
     } else {
-      console.log('Якщо Тип: ', this.selectedFilter);
+      // console.log('Якщо Тип: ', this.selectedFilter);
       return this.Pet_Card.filter(beast => beast.type === this.selectedFilter);
     }
 

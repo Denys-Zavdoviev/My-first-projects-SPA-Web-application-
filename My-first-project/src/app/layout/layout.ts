@@ -6,18 +6,31 @@ import {Search} from '../search/search';
 import {Filter} from '../filter/filter';
 import {PetDetail} from '../pet-detail/pet-detail';
 import {Beast} from '../shared/models/beasts.model';
+import {NgIf} from '@angular/common';
 
 @Component({
   selector: 'app-layout',
-  imports: [Header, Footer, ItemsList, PetDetail],
+  imports: [Header, Footer, ItemsList, PetDetail, NgIf],
   templateUrl: './layout.html',
   styleUrl: './layout.css',
 })
 export class Layout {
-  selectedPet!: Beast;
   public list_nav: string[] = ["Розділ 1", "Розділ 2", "Розділ 3"];
 
-  setSelectedPet(value: Beast) {
-    this.selectedPet = value;
+  selectedPet!: Beast;
+  selectedComment!: string;
+  showAlert: boolean = false;
+
+
+  setSelectedPet(event: { pet: Beast, comment: string }) {
+    this.selectedPet = event.pet;
+    this.selectedComment = event.comment;
+    this.showAlert = true;
+    console.log('Інфо відкрито!');
+  }
+
+  onAlertClose(): void {
+    this.showAlert = false;
+    console.log('Інфо закрито!');
   }
 }
