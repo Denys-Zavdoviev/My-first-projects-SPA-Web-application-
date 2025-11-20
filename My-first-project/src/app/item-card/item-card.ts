@@ -11,12 +11,4 @@ import {NgClass, NgFor, NgIf, NgStyle} from '@angular/common';
 export class ItemCard {
   @Input() pet!: Beast;
   @Input() comment!: string;
-
-  openPetDetailModal() {
-    const modalElement = document.getElementById('bookDetailModal');
-    if (modalElement) {
-      const modalInstance = new (window as any).bootstrap.Modal(modalElement);
-      modalInstance.show();
-    }
-  }
 }

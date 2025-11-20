@@ -9,6 +9,10 @@
 form select{
   margin: 10px 0px;
   font-size: 18px;
+  cursor: pointer;
+}
+form select option{
+  cursor: pointer;
 }
 .box-select{
   display: flex;

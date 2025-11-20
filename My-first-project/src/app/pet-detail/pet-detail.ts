@@ -1,11 +1,12 @@
-import {Component, Input} from '@angular/core';
+import {Component, Input, Output, EventEmitter} from '@angular/core';
 import {Beast} from '../shared/models/beasts.model';
-import {NgIf} from '@angular/common';
+import {NgIf, NgStyle} from '@angular/common';
 
 @Component({
   selector: 'app-pet-detail',
   imports: [
-    NgIf
+    NgIf,
+    NgStyle
   ],
   templateUrl: './pet-detail.html',
   styleUrl: './pet-detail.css',
@@ -13,4 +14,9 @@ import {NgIf} from '@angular/common';
 export class PetDetail {
   @Input() pet!: Beast;
   @Input() comment!: string;
+  @Output() close = new EventEmitter<void>();
+
+  closeModal() {
+    this.close.emit();
+  }
 }
