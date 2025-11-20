@@ -4,7 +4,8 @@
               'background-size': '150px 150px',
               'background-repeat': 'repeat',
               'background-position': 'center'}
-              : {}" >
+              : {}"
+     (click)="openPetDetailModal()">
   <div class="card-info">
     <img [src]="pet.imageUrl ? pet.imageUrl : '../img/Card-Pet/default.jpg'"
          alt="" class="pet_img">
@@ -15,5 +16,5 @@
   <!--  <p class="pet_lifespan">{{pet.lifespan}}</p>-->
   <!--  <p class="pet_diet">{{pet.diet}}</p>-->
   </div>
-  <div class="card-comm" *ngIf="comment">"{{comment}}"</div>
+<!--  <div class="card-comm" *ngIf="comment">"{{comment}}"</div>-->
 </div>

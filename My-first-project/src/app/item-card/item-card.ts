@@ -11,7 +11,12 @@ import {NgClass, NgFor, NgIf, NgStyle} from '@angular/common';
 export class ItemCard {
   @Input() pet!: Beast;
   @Input() comment!: string;
-  // isValidImage(url: string): boolean {
-  //   return /\.(jpg|jpeg|png|webp)$/i.test(url);
-  // }
+
+  openPetDetailModal() {
+    const modalElement = document.getElementById('bookDetailModal');
+    if (modalElement) {
+      const modalInstance = new (window as any).bootstrap.Modal(modalElement);
+      modalInstance.show();
+    }
+  }
 }

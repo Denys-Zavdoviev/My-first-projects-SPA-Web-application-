@@ -1,4 +1,4 @@
-import { Component, Input } from '@angular/core';
+import { Component, Input, Output, EventEmitter } from '@angular/core';
 import {ItemCard} from '../item-card/item-card';
 import {ageType, Beast, beastType, DietType} from '../shared/models/beasts.model';
 import {NgFor, NgIf} from '@angular/common';
@@ -59,6 +59,16 @@ export class ItemsList {
 
     `${this.Pet_Card[2].sound}! Я надто швидкий для камери.`
   ];
+
+  @Output()
+  selectedPetEvent: EventEmitter<Beast> = new EventEmitter<Beast>();
+
+  selectedPet!: Beast;
+
+  onSelectedPet(pet: Beast) {
+    this.selectedPet = pet;
+    this.selectedPetEvent.emit(this.selectedPet);
+  }
 
   getAllPets(){
     return this.Pet_Card.length;
