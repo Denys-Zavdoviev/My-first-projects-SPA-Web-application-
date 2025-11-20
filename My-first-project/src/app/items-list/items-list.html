@@ -4,7 +4,7 @@
     [typePets] = "Pet_Card"
     (selectedFilterChanged) = "getselectedFilter($event)">
   </app-filter>
-  <app-search></app-search>
+  <app-search (searchTextChanged)="getSearchText($event)"></app-search>
 </div>
 <div class="list-cards">
   <app-item-card *ngFor="let pet of filteredPets"

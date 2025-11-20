@@ -1,7 +1,7 @@
 export enum DietType {
-  Carnivore = 'хижак',
-  Herbivore = 'травоїдний',
-  Omnivore = 'всеїдний'
+  Carnivore = 'мʼясоїдство',
+  Herbivore = 'травоїдство',
+  Omnivore = 'всеїдність'
 }
 
 export enum ageType {

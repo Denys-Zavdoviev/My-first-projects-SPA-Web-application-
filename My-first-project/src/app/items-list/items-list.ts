@@ -21,7 +21,7 @@ export class ItemsList {
       breed: 'Раґамаффін', // Порода (якщо є)
       imageUrl: '/img/Card-Pet/Боря.jpg', //зображення
       liketoy: 'Нерви хозяїна', // середня тривалість життя (необов'язково)
-      diet:  DietType.Omnivore, // "хижак", "травоїдний", "всеїдний"
+      diet:  DietType.Carnivore, // "хижак", "травоїдний", "всеїдний"
       sound: 'Мяф', //коментар від кота
       imgback: '/img/Card-Pet/лапки65.png'
     },
@@ -73,6 +73,12 @@ export class ItemsList {
     });
   }
 
+  searchText: string = '';
+
+  getSearchText(value: string) {
+    this.searchText = value;
+  }
+
   getAllPets(){
     return this.Pet_Card.length;
   }
@@ -83,13 +89,25 @@ export class ItemsList {
     this.selectedFilter = value;
   }
   get filteredPets(){
-    if (this.selectedFilter === 'Всі') {
-      // console.log('Якщо Всі: ', this.selectedFilter);
-      return this.Pet_Card;
-    } else {
-      // console.log('Якщо Тип: ', this.selectedFilter);
-      return this.Pet_Card.filter(beast => beast.type === this.selectedFilter);
+    let petsToFilter = this.Pet_Card;
+    if (this.selectedFilter !== 'Всі') {
+      petsToFilter = petsToFilter.filter(beast => beast.type === this.selectedFilter);
     }
-
+    if (this.searchText && this.searchText.trim() !== '') {
+      const lowerCaseSearchText = this.searchText.toLowerCase().trim();
+      petsToFilter = petsToFilter.filter(beast => {
+        const comment = this.Pet_Comm[beast.id] ?? '';
+        return (
+          (beast.name ?? '').toLowerCase().includes(lowerCaseSearchText) ||
+          (beast.breed ?? '').toLowerCase().includes(lowerCaseSearchText) ||
+          (beast.type ?? '').toLowerCase().includes(lowerCaseSearchText) ||
+          (beast.liketoy ?? '').toLowerCase().includes(lowerCaseSearchText) ||
+          (beast.diet ?? '').toLowerCase().includes(lowerCaseSearchText) ||
+          (beast.sound ?? '').toLowerCase().includes(lowerCaseSearchText) ||
+          comment.toLowerCase().includes(lowerCaseSearchText)
+        );
+      });
+    }
+    return petsToFilter;
   }
 }
