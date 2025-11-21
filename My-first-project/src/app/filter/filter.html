@@ -1,0 +1,20 @@
+<div class="box-filter">
+  <h4>Фільтр</h4>
+  <form>
+    <div class="box-select">
+      <p>За типом: </p>
+      <select class=""
+              [(ngModel)]="selectedFilter"
+              (change)="onSelectedFilterChanged()"
+              name="filterSelect">
+        <option [value]="'Всі'">
+          Всі ({{ all }})
+        </option>
+        <option *ngFor="let type of uniqueTypes" [value]="type">
+         {{ type }} ({{ getTypeCount(type) }})
+        </option>
+      </select>
+    </div>
+  </form>
+</div>
+

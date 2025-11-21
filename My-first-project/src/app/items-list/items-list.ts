@@ -1,11 +1,13 @@
-import { Component } from '@angular/core';
+import { Component, Input, Output, EventEmitter } from '@angular/core';
 import {ItemCard} from '../item-card/item-card';
-import {ageType, Beast, DietType} from '../shared/models/beasts.model';
+import {ageType, Beast, beastType, DietType} from '../shared/models/beasts.model';
 import {NgFor, NgIf} from '@angular/common';
+import {Search} from '../search/search';
+import {Filter} from '../filter/filter';
 
 @Component({
   selector: 'app-items-list',
-  imports: [ItemCard, NgFor, NgIf],
+  imports: [ItemCard, NgFor, NgIf, Search, Filter],
   templateUrl: './items-list.html',
   styleUrl: './items-list.css',
 })
@@ -15,34 +17,37 @@ export class ItemsList {
       name: 'Боря', //ім'я тварини
       ageNum: 9, //вік
       ageYMD: ageType.Years,
-      type: 'Кіт', //тип кіт собака і тд
+      type: beastType.Cat, //тип кіт собака і тд
       breed: 'Раґамаффін', // Порода (якщо є)
       imageUrl: '/img/Card-Pet/Боря.jpg', //зображення
-      lifespan: 18, // середня тривалість життя (необов'язково)
-      diet:  DietType.Omnivore, // "хижак", "травоїдний", "всеїдний"
-      sound: 'Мяф' //коментар від кота
+      liketoy: 'Нерви хозяїна', // середня тривалість життя (необов'язково)
+      diet:  DietType.Carnivore, // "хижак", "травоїдний", "всеїдний"
+      sound: 'Мяф', //коментар від кота
+      imgback: '/img/Card-Pet/лапки65.png'
     },
     {  id: 1,
       name: 'Вольт',
       ageNum: 3,
       ageYMD: ageType.Years,
-      type: 'Собака',
+      type: beastType.Dog,
       breed: 'Бернський зенненхунд',
       imageUrl: '/img/Card-Pet/Вольт.jpg',
-      lifespan: 10,
+      liketoy: "М'ячик",
       diet:  DietType.Omnivore,
-      sound: 'Гаф'
+      sound: 'Гаф',
+      imgback: '/img/Card-Pet/Кістки65.png'
     },
     {  id: 2,
       name: 'Арон',
       ageNum: 5,
       ageYMD: ageType.Months,
-      type: 'Ворон',
+      type: beastType.Raven,
       breed: '',
       imageUrl: '',
-      lifespan: 10,
+      liketoy: '',
       diet:  DietType.Omnivore,
-      sound: 'Каар'
+      sound: 'Каар',
+      imgback: ''
     }
   ];
   public Pet_Comm: string[] = [
@@ -58,4 +63,51 @@ export class ItemsList {
     `${this.Pet_Card[2].sound}! Я надто швидкий для камери.`
   ];
 
+  @Output()
+  selectedPetEvent = new EventEmitter<{ pet: Beast, comment: string }>();
+
+  onSelectedPet(pet: Beast) {
+    this.selectedPetEvent.emit({
+      pet: pet,
+      comment: this.Pet_Comm[pet.id]
+    });
+  }
+
+  searchText: string = '';
+
+  getSearchText(value: string) {
+    this.searchText = value;
+  }
+
+  getAllPets(){
+    return this.Pet_Card.length;
+  }
+  selectedFilter: string = 'Всі';
+
+  getselectedFilter(value: string) {
+    console.log('Вибраний тип у ItemsList:', value);
+    this.selectedFilter = value;
+  }
+  get filteredPets(){
+    let petsToFilter = this.Pet_Card;
+    if (this.selectedFilter !== 'Всі') {
+      petsToFilter = petsToFilter.filter(beast => beast.type === this.selectedFilter);
+    }
+    if (this.searchText && this.searchText.trim() !== '') {
+      const lowerCaseSearchText = this.searchText.toLowerCase().trim();
+      petsToFilter = petsToFilter.filter(beast => {
+        const comment = this.Pet_Comm[beast.id] ?? '';
+        return (
+          (beast.name ?? '').toLowerCase().includes(lowerCaseSearchText) ||
+          (beast.breed ?? '').toLowerCase().includes(lowerCaseSearchText) ||
+          (beast.type ?? '').toLowerCase().includes(lowerCaseSearchText) ||
+          (beast.liketoy ?? '').toLowerCase().includes(lowerCaseSearchText) ||
+          (beast.diet ?? '').toLowerCase().includes(lowerCaseSearchText) ||
+          (beast.sound ?? '').toLowerCase().includes(lowerCaseSearchText) ||
+          comment.toLowerCase().includes(lowerCaseSearchText)
+        );
+      });
+    }
+    return petsToFilter;
+  }
 }

@@ -1,19 +1,17 @@
 <div class="card"
-     [ngStyle] = "pet.type === 'Кіт'?
-              {'background-image':'url(/img/Card-Pet/лапки65.png)',
+     [ngStyle] = "pet.imageUrl ?
+              {'background-image':`url(${pet.imgback})`,
               'background-size': '150px 150px',
               'background-repeat': 'repeat',
               'background-position': 'center'}
-              : {}" >
+              : {}"
+     >
   <div class="card-info">
     <img [src]="pet.imageUrl ? pet.imageUrl : '../img/Card-Pet/default.jpg'"
          alt="" class="pet_img">
-    <h2>{{pet.name}}</h2>
+    <h2 *ngIf = "pet.name">{{pet.name}}</h2>
     <p class="pet_age">Вік: {{pet.ageNum}} {{pet.ageYMD}}</p>
     <p class="pet_type"> Вид: {{pet.type}}</p>
     <p class="pet_breed" *ngIf = "pet.breed">Порода: {{pet.breed}}</p>
-  <!--  <p class="pet_lifespan">{{pet.lifespan}}</p>-->
-  <!--  <p class="pet_diet">{{pet.diet}}</p>-->
   </div>
-  <div class="card-comm" *ngIf="comment">"{{comment}}"</div>
 </div>

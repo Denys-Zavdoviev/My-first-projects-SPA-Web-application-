@@ -1,0 +1,38 @@
+<div class="modal fade" id="petDetailModal" tabindex="-1" aria-labelledby="petDetailModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-lg">
+    <div class="modal-content"
+         [ngStyle] = "pet.imageUrl ?
+              {'background-image':`url(${pet.imgback})`,
+              'background-size': '150px 150px',
+              'background-repeat': 'repeat',
+              'background-position': 'center'}
+              : {}">
+      <div class="modal-header">
+        <h1 class="modal-title" id="petDetailModalLabel">Розгорнута Інформація</h1>
+        <button type="button" class="btn-close" (click)="closeModal()">Х</button>
+      </div>
+      <div class="modal-body">
+        <!-- Pet Details -->
+        <div class="container mt-4">
+          <div class="row">
+            <div class="col-md-4">
+              <img [src]="pet.imageUrl ? pet.imageUrl : '../img/Card-Pet/default.jpg'"
+                   alt="" class="card-img-top pet_img">
+            </div>
+            <div class="box-info">
+              <div class="card-info">
+                <div class="name"><p *ngIf = "pet.name">Ім'я:</p> <h3>{{pet.name}}</h3></div>
+                <p class="pet_age">Вік: {{pet.ageNum}} {{pet.ageYMD}}</p>
+                <p class="pet_type"> Вид: {{pet.type}}</p>
+                <p class="pet_breed" *ngIf = "pet.breed">Порода: {{pet.breed}}</p>
+                <p class="pet_diet" *ngIf = "pet.diet">Тип харчування: {{pet.diet}}</p>
+                <p class="pet_lifespan" *ngIf = "pet.liketoy">Улюблена іграшка: {{pet.liketoy}}</p>
+              </div>
+              <div class="card-comm" *ngIf="comment">"{{comment}}"</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

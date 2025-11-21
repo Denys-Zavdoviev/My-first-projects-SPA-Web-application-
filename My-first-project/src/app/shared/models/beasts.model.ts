@@ -1,12 +1,24 @@
 export enum DietType {
-  Carnivore = 'хижак',
-  Herbivore = 'травоїдний',
-  Omnivore = 'всеїдний'
+  Carnivore = 'мʼясоїдство',
+  Herbivore = 'травоїдство',
+  Omnivore = 'всеїдність'
 }
+
 export enum ageType {
   Years = 'р.',
   Months = 'міс.',
   Days = 'д.'
+}
+
+export enum beastType {
+  Cat = 'Кіт',
+  Dog = 'Собака',
+  Fish = 'Риба',
+  Raven = 'Ворон',
+  Lizard = 'Ящірка',
+  Snail = 'Слимак',
+  Crab = 'Краб',
+  Snake = 'Змія'
 }
 
 export interface Beast {
@@ -14,10 +26,11 @@ export interface Beast {
   name?: string; //ім'я тварини
   ageNum: number; //вік число
   ageYMD: ageType; // рік, місяць, день
-  type: string; //тип кіт собака і тд
+  type: beastType; //тип кіт собака і тд
   breed?: string; // Порода (якщо є)
   imageUrl?: string; //зображення
-  lifespan?: number; // середня тривалість життя (необов'язково)
-  diet: DietType; // хижак, травоїдний, всеїдний
   sound?: string; //звучання тварини
+  liketoy?: string; // улюбоена іграшка
+  diet?: DietType; // хижак, травоїдний, всеїдний
+  imgback?: string; // фонове зображення
 }

@@ -1,4 +1,21 @@
-div{
+.search-filter{
+  display: flex;
+  flex-direction: row;
+  background: #f4d39c;
+  /*justify-content: flex-start;*/
+  align-items: flex-start;
+  /*gap: 5px;*/
+  /*background: #f4d39c;*/
+  height: max-content;
+  width: 100%;
+  /*padding: 0px;*/
+  margin: 0px;
+}
+app-search{
+  width: 100%;
+}
+.list-cards{
+  margin: 25px 0px;
   display: flex;
   flex-direction: row;
   flex-wrap: wrap;

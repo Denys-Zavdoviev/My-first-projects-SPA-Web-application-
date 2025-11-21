@@ -1,0 +1,19 @@
+<div class="box-search">
+  <h4>Пошук</h4>
+  <div class="box-search-input">
+    <form class="d-flex w-50 justify-content-center" role="search">
+      <input class="form-input"
+             type="search"
+             placeholder="Пошук..."
+             aria-label="Search"
+             name="searchText"
+             [(ngModel)]="searchText"
+             (input)="onSearchTextChanged()">
+      <button type="submit"
+              [ngClass]="{'btn': true, 'btn-outline-success': searchText}"
+              [disabled]="!searchText">
+              Пошук</button>
+    </form>
+  </div>
+  <p class="search-text">Результати пошуку для: <span>{{ searchText }}</span></p>
+</div>

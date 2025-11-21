@@ -1,6 +1,15 @@
-<div>
-  <app-item-card *ngFor="let pet of Pet_Card; let i = index"
+<div class="search-filter">
+  <app-filter
+    [all] = "getAllPets()"
+    [typePets] = "Pet_Card"
+    (selectedFilterChanged) = "getselectedFilter($event)">
+  </app-filter>
+  <app-search (searchTextChanged)="getSearchText($event)"></app-search>
+</div>
+<div class="list-cards">
+  <app-item-card *ngFor="let pet of filteredPets"
                  [pet]="pet"
-                 [comment] = "Pet_Comm[i]">
+                 [comment] = "Pet_Comm[pet.id]"
+                 (click)="onSelectedPet(pet)">
   </app-item-card>
 </div>
