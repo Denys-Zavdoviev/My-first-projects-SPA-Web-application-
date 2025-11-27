@@ -20,13 +20,13 @@ export class Filter {
   }
   get uniqueTypes(): string[] {
     return Object.values(beastType);
-    // return ['Кіт', 'Собака', 'Риба', 'Ворон', 'Ящірка', 'Слимак', 'Краб', 'Змія'];
-
   }
+
   selectedFilter: string= 'Всі';
 
   onSelectedFilterChanged(){
       console.log('Вибраний тип:', this.selectedFilter);
+    // При зміні вибраного значення, емітуємо його до батьківського компонента (ItemsList)
       this.selectedFilterChanged.emit(this.selectedFilter);
   }
 }

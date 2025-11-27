@@ -1,5 +1,8 @@
 import {EventEmitter, Injectable, Output} from '@angular/core';
 import {ageType, Beast, beastType, DietType} from '../shared/models/beasts.model';
+import { Observable, of, BehaviorSubject } from 'rxjs';
+
+export interface Item extends Beast {}
 
 @Injectable({
   providedIn: 'root',
@@ -56,10 +59,51 @@ export class PetService {
     `${this.Pet_Card[2].sound}! Я надто швидкий для камери.`
   ];
 
-  public getItems() {
-    return {
+  // 1. BehaviorSubject для поточного стану списку тварин
+  private _filteredPetsSubject: BehaviorSubject<Beast[]> = new BehaviorSubject<Beast[]>(this.Pet_Card);
+  // Observable для підписки компонентів
+  public filteredPets$: Observable<Beast[]> = this._filteredPetsSubject.asObservable();
+
+  // 2. Метод getItems() повертає Observable<Item[]>
+  public getItems(): Observable<{ pets: Item[], comments: string[] }> {
+    return of({ // Використовуємо оператор of()
       pets: this.Pet_Card,
       comments: this.Pet_Comm
-    };
+    });
+  }
+
+  // 3. Метод для фільтрації та оновлення BehaviorSubject
+  public filterPets(searchText: string, filterType: string): void {
+    let petsToFilter = this.Pet_Card;
+
+    // Фільтрація за типом (якщо не 'Всі')
+    if (filterType !== 'Всі') {
+      petsToFilter = petsToFilter.filter(beast => beast.type === filterType);
+    }
+
+    // Фільтрація за текстом пошуку
+    if (searchText && searchText.trim() !== '') {
+      const lowerCaseSearchText = searchText.toLowerCase().trim();
+      petsToFilter = petsToFilter.filter(beast => {
+        const comment = this.Pet_Comm[beast.id] ?? '';
+        return (
+          (beast.name ?? '').toLowerCase().includes(lowerCaseSearchText) ||
+          (beast.breed ?? '').toLowerCase().includes(lowerCaseSearchText) ||
+          (beast.type ?? '').toLowerCase().includes(lowerCaseSearchText) ||
+          (beast.liketoy ?? '').toLowerCase().includes(lowerCaseSearchText) ||
+          (beast.diet ?? '').toLowerCase().includes(lowerCaseSearchText) ||
+          (beast.sound ?? '').toLowerCase().includes(lowerCaseSearchText) ||
+          comment.toLowerCase().includes(lowerCaseSearchText)
+        );
+      });
+    }
+
+    // Оновлення BehaviorSubject
+    this._filteredPetsSubject.next(petsToFilter);
+  }
+
+  // Метод для отримання коментарів (залишаємо як є)
+  public getComments(): string[] {
+    return this.Pet_Comm;
   }
 }
