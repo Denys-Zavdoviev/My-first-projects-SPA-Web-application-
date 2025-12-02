@@ -1,6 +1,7 @@
-<div class="modal fade" id="petDetailModal" tabindex="-1" aria-labelledby="petDetailModalLabel" aria-hidden="true">
   <div class="modal-dialog modal-lg">
+    <h1 class="modal-title" id="petDetailModalLabel">Розгорнута Інформація</h1>
     <div class="modal-content"
+         *ngIf="pet"
          [ngStyle] = "pet.imageUrl ?
               {'background-image':`url(${pet.imgback})`,
               'background-size': '150px 150px',
@@ -8,8 +9,8 @@
               'background-position': 'center'}
               : {}">
       <div class="modal-header">
-        <h1 class="modal-title" id="petDetailModalLabel">Розгорнута Інформація</h1>
-        <button type="button" class="btn-close" (click)="closeModal()">Х</button>
+        <h2 *ngIf = "pet.name">{{pet.name}}</h2>
+<!--        <button type="button" class="btn-close" (click)="closeModal()">Х</button>-->
       </div>
       <div class="modal-body">
         <!-- Pet Details -->
@@ -34,5 +35,8 @@
         </div>
       </div>
     </div>
+    <div *ngIf="!pet">
+      <h2>Вихованця не знайдено</h2>
+      <p>Схоже, вихованця за цим ID не існує або дані ще завантажуються.</p>
+    </div>
   </div>
-</div>

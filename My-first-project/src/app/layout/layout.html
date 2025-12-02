@@ -1,7 +1,5 @@
 <div class="layout-body">
   <app-header [navItems]="list_nav"></app-header>
-  <app-items-list (selectedPetEvent)="setSelectedPet($event)"></app-items-list>
-  <app-pet-detail *ngIf="showAlert" (close)="onAlertClose()"
-                  [pet]="selectedPet" [comment]="selectedComment"></app-pet-detail>
+  <router-outlet></router-outlet>
   <app-footer [footerItems]="list_nav"></app-footer>
 </div>

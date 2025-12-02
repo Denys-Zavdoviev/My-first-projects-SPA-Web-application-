@@ -97,7 +97,6 @@ export class PetService {
         );
       });
     }
-
     // Оновлення BehaviorSubject
     this._filteredPetsSubject.next(petsToFilter);
   }
@@ -105,5 +104,12 @@ export class PetService {
   // Метод для отримання коментарів (залишаємо як є)
   public getComments(): string[] {
     return this.Pet_Comm;
+  }
+
+  // Додано метод для отримання одного вихованця за ID
+  public getPetById(id: number): Observable<{ pet: Beast | undefined, comment: string | undefined }> {
+    const pet = this.Pet_Card.find(b => b.id === id);
+    const comment = pet ? this.Pet_Comm[pet.id] : undefined;
+    return of({ pet, comment });
   }
 }

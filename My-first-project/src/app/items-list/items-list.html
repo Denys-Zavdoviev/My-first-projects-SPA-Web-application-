@@ -8,8 +8,6 @@
 </div>
 <div class="list-cards">
   <app-item-card *ngFor="let pet of filteredPets"
-                 [pet]="pet"
-                 [comment] = "Pet_Comm[pet.id]"
-                 (click)="onSelectedPet(pet)">
+                 [pet]="pet">
   </app-item-card>
 </div>

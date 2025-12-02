@@ -1,4 +1,5 @@
-<div class="card"
+<a class="card"
+   [routerLink]="['/items', pet.id]"
      [ngStyle] = "pet.imageUrl ?
               {'background-image':`url(${pet.imgback})`,
               'background-size': '150px 150px',
@@ -14,4 +15,4 @@
     <p class="pet_type"> Вид: {{pet.type}}</p>
     <p class="pet_breed" *ngIf = "pet.breed">Порода: {{pet.breed}}</p>
   </div>
-</div>
+</a>

@@ -61,16 +61,16 @@ export class ItemsList implements OnInit, OnDestroy{ // Реалізація OnD
     console.log('[ItemsList] ngOnDestroy: Компонент знищено.');
   }
 
-  @Output()
-  selectedPetEvent = new EventEmitter<{ pet: Beast, comment: string }>();
-
-  onSelectedPet(pet: Beast) {
-    console.log(`[ItemsList] onSelectedPet: Вибрано вихованця ID: ${pet.id}, Ім'я: ${pet.name}.`);
-    this.selectedPetEvent.emit({
-      pet: pet,
-      comment: this.Pet_Comm[pet.id]
-    });
-  }
+  // @Output()
+  // selectedPetEvent = new EventEmitter<{ pet: Beast, comment: string }>();
+  //
+  // onSelectedPet(pet: Beast) {
+  //   console.log(`[ItemsList] onSelectedPet: Вибрано вихованця ID: ${pet.id}, Ім'я: ${pet.name}.`);
+  //   this.selectedPetEvent.emit({
+  //     pet: pet,
+  //     comment: this.Pet_Comm[pet.id]
+  //   });
+  // }
 
   searchText: string = '';
   selectedFilter: string = 'Всі'; // Зберігаємо стан фільтра
@@ -93,26 +93,4 @@ export class ItemsList implements OnInit, OnDestroy{ // Реалізація OnD
     // Оновлюємо фільтрацію, використовуючи обидва параметри
     this.petService.filterPets(this.searchText, this.selectedFilter);
   }
-  // get filteredPets(){
-  //   let petsToFilter = this.Pet_Card;
-  //   if (this.selectedFilter !== 'Всі') {
-  //     petsToFilter = petsToFilter.filter(beast => beast.type === this.selectedFilter);
-  //   }
-  //   if (this.searchText && this.searchText.trim() !== '') {
-  //     const lowerCaseSearchText = this.searchText.toLowerCase().trim();
-  //     petsToFilter = petsToFilter.filter(beast => {
-  //       const comment = this.Pet_Comm[beast.id] ?? '';
-  //       return (
-  //         (beast.name ?? '').toLowerCase().includes(lowerCaseSearchText) ||
-  //         (beast.breed ?? '').toLowerCase().includes(lowerCaseSearchText) ||
-  //         (beast.type ?? '').toLowerCase().includes(lowerCaseSearchText) ||
-  //         (beast.liketoy ?? '').toLowerCase().includes(lowerCaseSearchText) ||
-  //         (beast.diet ?? '').toLowerCase().includes(lowerCaseSearchText) ||
-  //         (beast.sound ?? '').toLowerCase().includes(lowerCaseSearchText) ||
-  //         comment.toLowerCase().includes(lowerCaseSearchText)
-  //       );
-  //     });
-  //   }
-  //   return petsToFilter;
-  // }
 }
