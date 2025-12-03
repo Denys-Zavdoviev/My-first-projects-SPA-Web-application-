@@ -1,5 +1,6 @@
 <a class="card"
    [routerLink]="['/items', pet.id]"
+   appHoverCard="rgba(242, 209, 155, 0.5)"
      [ngStyle] = "pet.imageUrl ?
               {'background-image':`url(${pet.imgback})`,
               'background-size': '150px 150px',
@@ -11,7 +12,7 @@
     <img [src]="pet.imageUrl ? pet.imageUrl : '../img/Card-Pet/default.jpg'"
          alt="" class="pet_img">
     <h2 *ngIf = "pet.name">{{pet.name}}</h2>
-    <p class="pet_age">Вік: {{pet.ageNum}} {{pet.ageYMD}}</p>
+    <p class="pet_age">Вік: {{pet.ageNum}} {{pet.ageYMD | ageUnitFull: pet.ageNum}}</p>
     <p class="pet_type"> Вид: {{pet.type}}</p>
     <p class="pet_breed" *ngIf = "pet.breed">Порода: {{pet.breed}}</p>
   </div>

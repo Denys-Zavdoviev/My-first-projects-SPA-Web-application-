@@ -12,6 +12,7 @@
   align-items: center;
   gap: 10px;
   cursor: pointer;
+  /*border: rgba(242, 209, 155, 0.58);*/
 }
 .card p{
   font-size: 18px;
