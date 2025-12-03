@@ -2,10 +2,12 @@ import {Component, Input} from '@angular/core';
 import {Beast, DietType} from '../shared/models/beasts.model';
 import {NgClass, NgFor, NgIf, NgStyle} from '@angular/common';
 import {RouterLink} from '@angular/router';
+import {AgeUnitFullPipe} from '../pipes/age-unit-full-pipe';
+import {HoverCard} from '../directives/hover-card';
 
 @Component({
   selector: 'app-item-card',
-  imports: [NgFor, NgIf, NgStyle,NgClass, RouterLink],
+  imports: [NgFor, NgIf, NgStyle,NgClass, RouterLink, AgeUnitFullPipe, HoverCard],
   templateUrl: './item-card.html',
   styleUrl: './item-card.css',
 })

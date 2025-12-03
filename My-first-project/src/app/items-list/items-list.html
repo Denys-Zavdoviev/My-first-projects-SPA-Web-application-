@@ -7,7 +7,7 @@
   <app-search (searchTextChanged)="getSearchText($event)"></app-search>
 </div>
 <div class="list-cards">
-  <app-item-card *ngFor="let pet of filteredPets"
+  <app-item-card *ngFor="let pet of filteredPets$ | async"
                  [pet]="pet">
   </app-item-card>
 </div>
