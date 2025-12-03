@@ -1,17 +1,18 @@
-.modal {
-  position: fixed;
-  top: 0; left: 0;
-  width: 100vw; height: 100vh;
+.modal-dialog {
   display: flex;
   justify-content: center;
   align-items: center;
-  background-color: rgba(0,0,0,0.5);
-  z-index: 1050;
-  color: #492b00;
+  flex-direction: column;
+  margin: 50px 25px;
+  gap: 15px;
 }
-
+.modal-title{
+  text-align: left;
+  width: 100%;
+  padding-left: 25px;
+}
 .modal-content {
-  margin: 0px 25px;
+  /*margin: 0px 25px;*/
   padding: 15px 20px;
   height: max-content;
   min-width: 500px;
