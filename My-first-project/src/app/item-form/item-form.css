@@ -1,0 +1,144 @@
+/* Стилізація контейнера форми (імітує картку/фільтр) */
+.form-container {
+  margin: 30px auto; /* Центрування */
+  padding: 25px 35px;
+  width: 90%;
+  max-width: 700px; /* Обмеження ширини */
+
+  /* Стилі як у картки (item-card.css) */
+  background-color: #f2d19b;
+  border: #633d01 5px solid;
+  border-radius: 8px;
+}
+
+.form-container h2 {
+  color: #492b00;
+  border-bottom: #633d01 2px solid;
+  padding-bottom: 10px;
+  margin-bottom: 20px;
+  text-align: center;
+}
+
+.pet-form {
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+}
+
+/* Стилізація груп полів */
+.form-group {
+  display: flex;
+  flex-direction: column;
+}
+
+.form-group-inline {
+  display: flex;
+  gap: 20px;
+}
+
+.age-input, .age-type-select {
+  flex: 1; /* Рівна ширина для полів віку */
+}
+
+.form-group label {
+  font-size: 18px;
+  color: #633d01;
+  margin-bottom: 5px;
+  font-weight: bold;
+}
+
+/* Стилізація полів вводу (як у search.css / filter.css) */
+.form-group input[type="text"],
+.form-group input[type="number"],
+.form-group select,
+.form-group textarea {
+  font-size: 18px;
+  border: #633d01 2px solid;
+  border-radius: 4px;
+  padding: 8px 10px;
+  cursor: text;
+  background-color: #fff8e8; /* Світліший фон для полів */
+  transition: border-color 0.3s;
+}
+
+.form-group input:focus,
+.form-group select:focus,
+.form-group textarea:focus {
+  border-color: #ffcc5b; /* Ефект фокусу */
+  outline: none;
+}
+
+.form-group textarea {
+  resize: vertical; /* Дозволити лише вертикальну зміну розміру */
+}
+
+/* Стилізація кнопки submit (як у search.css) */
+.submit-button {
+  margin-top: 20px;
+  font-size: 20px;
+  cursor: pointer;
+  border: #633d01 3px solid;
+  border-radius: 8px;
+  padding: 10px 20px;
+  background: #623d01; /* Колір кнопки */
+  color: #ffcc5b; /* Колір тексту */
+  font-weight: bold;
+  transition: background 0.3s;
+}
+
+.submit-button:hover:not([disabled]) {
+  background: #492b00; /* Затемнення при наведенні (без ефекту тіні) */
+}
+
+.submit-button[disabled] {
+  background: #a98f73;
+  cursor: not-allowed;
+  opacity: 0.7;
+}
+
+/* Стилі для повідомлень про помилки (error-message) */
+.error-message {
+  color: #a00;
+  font-size: 14px;
+  margin-top: 5px;
+}
+
+/* Стиль для невалідних полів */
+.pet-form input.ng-invalid.ng-touched,
+.pet-form select.ng-invalid.ng-touched,
+.pet-form textarea.ng-invalid.ng-touched {
+  border-color: #a00; /* Червона рамка для невалідних полів */
+}
+
+/* Стилізація попереднього перегляду */
+.image-preview {
+  margin-top: 15px;
+  padding: 15px;
+  background-color: #f7e9c5; /* Трохи світліший фон */
+  border: #633d01 2px dashed;
+  border-radius: 4px;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.preview-img {
+  max-width: 100%;
+  height: auto;
+  border-radius: 4px;
+  border: 1px solid #633d01;
+}
+
+/* Стиль для кнопки очищення (використовуємо submit-button стилі) */
+.clear-button {
+  background: #a00; /* Червоний колір для кнопки очищення */
+  color: #fff8e8;
+  border-color: #800;
+  width: 50%;
+  align-self: flex-start;
+  margin-top: 5px;
+}
+
+.clear-button:hover:not([disabled]) {
+  background: #800;
+}

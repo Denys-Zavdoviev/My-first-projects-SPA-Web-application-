@@ -1,14 +1,20 @@
 import { Component, Input } from '@angular/core';
 import {NgForOf} from '@angular/common';
+import {RouterLink} from '@angular/router';
+
+interface NavItem {
+  label: string;
+  route: string;
+}
 
 @Component({
   selector: 'app-footer',
-  imports: [NgForOf],
+  imports: [NgForOf, RouterLink],
   templateUrl: './footer.html',
   styleUrl: './footer.css',
 })
 export class Footer {
-  @Input() footerItems: string[] = [];
+  @Input() navItems: NavItem[] = [];
 
   text_footer = '© 2025. Виконано в навчальних цілях';
   title_link =  "Зворотний зв'язок з нами =)";

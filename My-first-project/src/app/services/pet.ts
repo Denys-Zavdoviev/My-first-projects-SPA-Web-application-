@@ -59,12 +59,14 @@ export class PetService {
     `${this.Pet_Card[2].sound}! Я надто швидкий для камери.`
   ];
 
-  // 1. BehaviorSubject для поточного стану списку тварин
+  // BehaviorSubject для поточного стану списку тварин
   private _filteredPetsSubject: BehaviorSubject<Beast[]> = new BehaviorSubject<Beast[]>(this.Pet_Card);
   // Observable для підписки компонентів
   public filteredPets$: Observable<Beast[]> = this._filteredPetsSubject.asObservable();
 
-  // 2. Метод getItems() повертає Observable<Item[]>
+
+
+  // Метод getItems() повертає Observable<Item[]>
   public getItems(): Observable<{ pets: Item[], comments: string[] }> {
     return of({ // Використовуємо оператор of()
       pets: this.Pet_Card,
@@ -72,7 +74,7 @@ export class PetService {
     });
   }
 
-  // 3. Метод для фільтрації та оновлення BehaviorSubject
+  // Метод для фільтрації та оновлення BehaviorSubject
   public filterPets(searchText: string, filterType: string): void {
     let petsToFilter = this.Pet_Card;
 
@@ -111,5 +113,11 @@ export class PetService {
     const pet = this.Pet_Card.find(b => b.id === id);
     const comment = pet ? this.Pet_Comm[pet.id] : undefined;
     return of({ pet, comment });
+  }
+
+  public addPetAndFilter(newPet: Beast, newComment: string): void {
+    this.Pet_Card.push(newPet);
+    this.Pet_Comm.push(newComment);
+    this.filterPets('', 'Всі');
   }
 }

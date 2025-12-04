@@ -1,10 +1,10 @@
 <div class="foot">
   <div class="foot-info">
     <div class="box-logo">
-      <img src="/img/Logo.png" alt="Logo" class="logo-img">
+      <a [routerLink]="['/items']"><img src="/img/Logo.png" alt="Logo" class="logo-img"></a>
       <div class="list-nav">
-        <a *ngFor="let item of footerItems" href="#">
-          {{item}}
+        <a *ngFor="let item of navItems" [routerLink]="item.route">
+          {{item.label}}
         </a>
       </div>
     </div>

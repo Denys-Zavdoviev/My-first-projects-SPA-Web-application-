@@ -1,0 +1,98 @@
+<div class="form-container">
+  <h2>Додати нового друга</h2>
+
+  <form [formGroup]="petForm" (ngSubmit)="onSubmit()" class="pet-form">
+
+    <div class="form-group">
+      <label for="name">Ім'я:</label>
+      <input id="name" type="text" formControlName="name">
+      <div *ngIf="f['name'].invalid && f['name'].touched" class="error-message">
+        <div *ngIf="f['name'].errors!['required']">Ім'я обов'язкове.</div>
+        <div *ngIf="f['name'].errors!['minlength']">Мінімум 2 символи.</div>
+      </div>
+    </div>
+
+    <div class="form-group-inline">
+      <div class="form-group age-input">
+        <label for="ageNum">Вік (число):</label>
+        <input id="ageNum" type="number" formControlName="ageNum" min="1">
+        <div *ngIf="f['ageNum'].invalid && f['ageNum'].touched" class="error-message">
+          <div *ngIf="f['ageNum'].errors!['required']">Вік обов'язковий.</div>
+          <div *ngIf="f['ageNum'].errors!['min']">Має бути не менше 1.</div>
+        </div>
+      </div>
+
+      <div class="form-group age-type-select">
+        <label for="ageYMD">Одиниця віку:</label>
+        <select id="ageYMD" formControlName="ageYMD">
+          <option *ngFor="let type of ageTypes" [ngValue]="type">{{ type | ageUnitFull: f['ageNum'].value}}</option>
+        </select>
+        <div *ngIf="f['ageYMD'].invalid && f['ageYMD'].touched" class="error-message">
+          <div *ngIf="f['ageYMD'].errors!['required']">Одиниця обов'язкова.</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="form-group">
+      <label for="type">Вид тварини:</label>
+      <select id="type" formControlName="type">
+        <option *ngFor="let type of beastTypes" [ngValue]="type">{{ type }}</option>
+      </select>
+      <div *ngIf="f['type'].invalid && f['type'].touched" class="error-message">
+        <div *ngIf="f['type'].errors!['required']">Вид обов'язковий.</div>
+      </div>
+    </div>
+    <div class="form-group">
+      <label for="fileUpload">Обрати зображення з папки проєкту:</label>
+      <input
+        id="fileUpload"
+        type="file"
+        (change)="onFileSelected($event)"
+        accept="image/*"
+        [disabled]="!!f['imageFileName'].value"
+      >
+    </div>
+    <div *ngIf="previewUrl" class="image-preview form-group">
+      <label>Попередній перегляд фото друга:</label>
+      <img [src]="previewUrl" alt="Попередній перегляд" class="preview-img">
+    </div>
+
+    <div class="form-group">
+      <label for="breed">Порода:</label>
+      <input id="breed" type="text" formControlName="breed">
+    </div>
+
+    <div class="form-group">
+      <label for="diet">Раціон:</label>
+      <select id="diet" formControlName="diet">
+        <option *ngFor="let type of dietTypes" [ngValue]="type">{{ type }}</option>
+      </select>
+      <div *ngIf="f['diet'].invalid && f['diet'].touched" class="error-message">
+        <div *ngIf="f['diet'].errors!['required']">Раціон обов'язковий.</div>
+      </div>
+    </div>
+
+    <div class="form-group">
+      <label for="liketoy">Улюблена іграшка:</label>
+      <input id="liketoy" type="text" formControlName="liketoy">
+    </div>
+    <div class="form-group">
+      <label for="sound">Звучання:</label>
+      <input id="sound" type="text" formControlName="sound">
+    </div>
+
+    <div class="form-group">
+      <label for="comment">Коментар (від тварини):</label>
+      <textarea id="comment" formControlName="comment" rows="4"></textarea>
+      <div *ngIf="f['comment'].invalid && f['comment'].touched" class="error-message">
+        <div *ngIf="f['comment'].errors!['required']">Коментар обов'язковий.</div>
+        <div *ngIf="f['comment'].errors!['maxlength']">Максимум 250 символів.</div>
+      </div>
+    </div>
+
+
+    <button type="submit" [disabled]="petForm.invalid" class="submit-button">
+      Додати Друга
+    </button>
+  </form>
+</div>

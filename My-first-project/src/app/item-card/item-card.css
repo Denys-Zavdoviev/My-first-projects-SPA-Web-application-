@@ -2,8 +2,8 @@
   margin: 0px 25px;
   padding: 15px 20px;
   height: max-content;
-  min-width: 300px;
-  max-width: 550px;
+  width: 300px;
+  /*max-width: 550px;*/
   background-color: #f2d19b;
   border: #633d01 5px solid;
   border-radius: 8px;
@@ -19,10 +19,24 @@
   color: #492b00;
   word-break: break-all;
 }
+.card p, .card h2{
+  text-align: left;
+  width: 100%;
+}
+.card-info{
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  /*justify-content: center;*/
+}
 
 .pet_img{
+  align-self: center;
   border-radius: 8px;
+  object-fit: cover;
   height: 450px;
+  max-width: 300px;
 }
 
 .card-comm{

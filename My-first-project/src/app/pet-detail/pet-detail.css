@@ -16,7 +16,7 @@
   padding: 15px 20px;
   height: max-content;
   min-width: 500px;
-  max-width: 900px;
+  max-width: 1200px;
   background-color: #f2d19b;
   border: #633d01 5px solid;
   border-radius: 8px;
@@ -45,7 +45,13 @@
 }
 .pet_img{
   border-radius: 8px;
-  height: 650px;
+  align-self: center;
+  object-fit: cover;
+  /*height: 450px;*/
+  min-height: 450px;
+  max-height: 650px;
+  min-width: 350px;
+  max-width: 850px;
 }
 .box-info{
   display: flex;
