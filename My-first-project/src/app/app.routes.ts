@@ -2,6 +2,7 @@ import {RouterModule, Routes} from '@angular/router';
 import {ItemsList} from './items-list/items-list';
 import {NgModule} from '@angular/core';
 import {PetDetail} from './pet-detail/pet-detail';
+import {ItemForm} from './item-form/item-form';
 
 export const routes: Routes = [
 // Маршрут для головної сторінки, перенаправляє на /items
@@ -9,6 +10,8 @@ export const routes: Routes = [
 
   // Маршрут для списку елементів
   { path: 'items', component: ItemsList },
+
+  { path: 'add-item', component: ItemForm },
 
   // Динамічний маршрут для детального перегляду
   { path: 'items/:id', component: PetDetail },

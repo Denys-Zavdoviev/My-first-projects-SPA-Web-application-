@@ -18,7 +18,8 @@ export enum beastType {
   Lizard = 'Ящірка',
   Snail = 'Слимак',
   Crab = 'Краб',
-  Snake = 'Змія'
+  Snake = 'Змія',
+  Spider = 'Павук'
 }
 
 export interface Beast {
