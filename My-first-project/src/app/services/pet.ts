@@ -1,6 +1,8 @@
 import {EventEmitter, Injectable, Output} from '@angular/core';
 import {ageType, Beast, beastType, DietType} from '../shared/models/beasts.model';
-import { Observable, of, BehaviorSubject } from 'rxjs';
+import { Observable, of, BehaviorSubject, throwError } from 'rxjs';
+import { HttpClient, HttpHeaders, HttpErrorResponse } from '@angular/common/http';
+import { catchError, tap } from 'rxjs/operators';
 
 export interface Item extends Beast {}
 
@@ -8,75 +10,37 @@ export interface Item extends Beast {}
   providedIn: 'root',
 })
 export class PetService {
-  public Pet_Card: Beast[] = [
-    {  id: 0, //id
-      name: 'Боря', //ім'я тварини
-      ageNum: 9, //вік
-      ageYMD: ageType.Years,
-      type: beastType.Cat, //тип кіт собака і тд
-      breed: 'Раґамаффін', // Порода (якщо є)
-      imageUrl: '/img/Card-Pet/Боря.jpg', //зображення
-      liketoy: 'Нерви хозяїна', // середня тривалість життя (необов'язково)
-      diet:  DietType.Carnivore, // "хижак", "травоїдний", "всеїдний"
-      sound: 'Мяф', //коментар від кота
-      imgback: '/img/Card-Pet/лапки65.png'
-    },
-    {  id: 1,
-      name: 'Вольт',
-      ageNum: 3,
-      ageYMD: ageType.Years,
-      type: beastType.Dog,
-      breed: 'Бернський зенненхунд',
-      imageUrl: '/img/Card-Pet/Вольт.jpg',
-      liketoy: "М'ячик",
-      diet:  DietType.Omnivore,
-      sound: 'Гаф',
-      imgback: '/img/Card-Pet/Кістки65.png'
-    },
-    {  id: 2,
-      name: 'Арон',
-      ageNum: 5,
-      ageYMD: ageType.Months,
-      type: beastType.Raven,
-      breed: '',
-      imageUrl: '',
-      liketoy: '',
-      diet:  DietType.Omnivore,
-      sound: 'Каар',
-      imgback: ''
-    }
-  ];
-  public Pet_Comm: string[] = [
-    `${this.Pet_Card[0].sound}!
-    Як ви вже зрозуміли, я ${this.Pet_Card[0].name}.
-    В себе вдома я голова всього. А ще, це сторінка про моїх сусідів. Тому знайте. Я за вами стежу!)`,
+  constructor(private http: HttpClient) { }
+  private readonly apiUrl = 'http://localhost:3000/pets';
+  private allPets: Beast[] = [];
 
-    `${this.Pet_Card[1].sound}!
-    Мене звати ${this.Pet_Card[1].name}.
-    Я люблю гуляти зі своїми господарями. А ще люблю коли мене годують.
-    В мене є друг ${this.Pet_Card[0].name}, ${this.Pet_Card[1].sound}`,
-
-    `${this.Pet_Card[2].sound}! Я надто швидкий для камери.`
-  ];
-
-  // BehaviorSubject для поточного стану списку тварин
-  private _filteredPetsSubject: BehaviorSubject<Beast[]> = new BehaviorSubject<Beast[]>(this.Pet_Card);
-  // Observable для підписки компонентів
+  private _filteredPetsSubject: BehaviorSubject<Beast[]> = new BehaviorSubject<Beast[]>([]);
   public filteredPets$: Observable<Beast[]> = this._filteredPetsSubject.asObservable();
 
-
-
-  // Метод getItems() повертає Observable<Item[]>
-  public getItems(): Observable<{ pets: Item[], comments: string[] }> {
-    return of({ // Використовуємо оператор of()
-      pets: this.Pet_Card,
-      comments: this.Pet_Comm
-    });
+  // Метод getItems() Новий
+  public getItems(): Observable<Beast[]> {
+    return this.http.get<Beast[]>(this.apiUrl)
+      .pipe(
+        tap(pets => {
+          this.allPets = pets;
+          this.filterPets('', 'Всі');
+        }),
+        catchError(this.handleError));
   }
 
-  // Метод для фільтрації та оновлення BehaviorSubject
+  // Новий
+  public getPetById(id: number): Observable<Beast> {
+    const headers = new HttpHeaders({
+      'Cache-Control': 'no-cache, no-store, must-revalidate'
+    });
+    return this.http.get<Beast>(`${this.apiUrl}/${id}`)
+      .pipe(
+        catchError(this.handleError));
+  }
+
+  // Метод для фільтрації
   public filterPets(searchText: string, filterType: string): void {
-    let petsToFilter = this.Pet_Card;
+    let petsToFilter = this.allPets;
 
     // Фільтрація за типом (якщо не 'Всі')
     if (filterType !== 'Всі') {
@@ -87,7 +51,7 @@ export class PetService {
     if (searchText && searchText.trim() !== '') {
       const lowerCaseSearchText = searchText.toLowerCase().trim();
       petsToFilter = petsToFilter.filter(beast => {
-        const comment = this.Pet_Comm[beast.id] ?? '';
+        const comment = beast.comment ?? '';
         return (
           (beast.name ?? '').toLowerCase().includes(lowerCaseSearchText) ||
           (beast.breed ?? '').toLowerCase().includes(lowerCaseSearchText) ||
@@ -95,29 +59,42 @@ export class PetService {
           (beast.liketoy ?? '').toLowerCase().includes(lowerCaseSearchText) ||
           (beast.diet ?? '').toLowerCase().includes(lowerCaseSearchText) ||
           (beast.sound ?? '').toLowerCase().includes(lowerCaseSearchText) ||
+          // (beast.comment ?? '').toLowerCase().includes(lowerCaseSearchText) ||
           comment.toLowerCase().includes(lowerCaseSearchText)
         );
       });
     }
-    // Оновлення BehaviorSubject
     this._filteredPetsSubject.next(petsToFilter);
   }
 
-  // Метод для отримання коментарів (залишаємо як є)
-  public getComments(): string[] {
-    return this.Pet_Comm;
+  public addPet(newPet: Beast): Observable<Beast> {
+    return this.http.post<Beast>(this.apiUrl, newPet)
+      .pipe(
+        catchError(this.handleError));
   }
 
-  // Додано метод для отримання одного вихованця за ID
-  public getPetById(id: number): Observable<{ pet: Beast | undefined, comment: string | undefined }> {
-    const pet = this.Pet_Card.find(b => b.id === id);
-    const comment = pet ? this.Pet_Comm[pet.id] : undefined;
-    return of({ pet, comment });
-  }
+  private handleError(error: HttpErrorResponse): Observable<never> {
+    console.error('Server error:', error);
+    let errorMessage = 'Невідома помилка на сервері.';
 
-  public addPetAndFilter(newPet: Beast, newComment: string): void {
-    this.Pet_Card.push(newPet);
-    this.Pet_Comm.push(newComment);
-    this.filterPets('', 'Всі');
+    if (error.error instanceof ErrorEvent) {
+      errorMessage = `Помилка клієнта: ${error.error.message}`;
+    } else {
+      if (error.status === 0) {
+        errorMessage = 'Помилка мережі (сервер не відповідає).';
+      } else if (error.status === 404) {
+        errorMessage = `Ресурс не знайдено (404).`;
+      } else {
+        errorMessage = `Код помилки: ${error.status}. Повідомлення: ${error.message}`;
+      }
+    }
+    return throwError(() => new Error(errorMessage));
+  }
+  public deletePet(id: string): Observable<any> {
+    const url = `${this.apiUrl}/${id}`; // URL: http://localhost:3000/pets/ID
+    return this.http.delete(url) // Використовуємо метод DELETE
+      .pipe(
+        catchError(this.handleError)
+      );
   }
 }

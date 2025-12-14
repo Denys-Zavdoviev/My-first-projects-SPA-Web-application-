@@ -15,5 +15,8 @@
     <p class="pet_age">Вік: {{pet.ageNum}} {{pet.ageYMD | ageUnitFull: pet.ageNum}}</p>
     <p class="pet_type"> Вид: {{pet.type}}</p>
     <p class="pet_breed" *ngIf = "pet.breed">Порода: {{pet.breed}}</p>
+    <button class="delete-btn" (click)="onDelete(); $event.stopPropagation()">
+      Видалити
+    </button>
   </div>
 </a>

@@ -21,12 +21,9 @@ import { Subscription, Observable } from 'rxjs';
 export class ItemsList implements OnInit, OnDestroy{
 
   public Pet_Card: Beast[] = [];
-  public Pet_Comm: string[] = [];
 
   public filteredPets$: Observable<Beast[]>;
-
   private getItemsSubscription!: Subscription;
-  // private filteredPetsSubscription!: Subscription;
 
   constructor(private petService: PetService) {
     this.filteredPets$ = this.petService.filteredPets$;
@@ -35,25 +32,23 @@ export class ItemsList implements OnInit, OnDestroy{
   // Виклик методу getItems() у ngOnInit()
   ngOnInit(): void {
     console.log('[ItemsList] ngOnInit: Підписка на сервіс даних.');
-    this.getItemsSubscription = this.petService.getItems().subscribe(data => {
-      this.Pet_Card = data.pets;
-      this.Pet_Comm = data.comments;
-      this.petService.filterPets(this.searchText, this.selectedFilter);
+    this.getItemsSubscription = this.petService.getItems().subscribe( pets=> {
+      this.Pet_Card = pets;
+      // this.petService.filterPets(this.searchText, this.selectedFilter);
     });
   }
 
   ngOnDestroy(): void {
     if (this.getItemsSubscription) {
-      this.getItemsSubscription.unsubscribe(); // Відписка від getItems()
+      this.getItemsSubscription.unsubscribe();
       console.log('[ItemsList] ngOnDestroy: Відписка від getItemsSubscription.');
     }
     console.log('[ItemsList] ngOnDestroy: Компонент знищено.');
   }
 
   searchText: string = '';
-  selectedFilter: string = 'Всі'; // Зберігаємо стан фільтра
+  selectedFilter: string = 'Всі';
 
-  // 5. Поле пошуку має відправляти запит у сервіс
   getSearchText(value: string) {
     this.searchText = value;
     console.log(`[ItemsList] getSearchText: Оновлення тексту пошуку: "${value}".`);
@@ -68,7 +63,18 @@ export class ItemsList implements OnInit, OnDestroy{
   getselectedFilter(value: string) {
     console.log('[ItemsList] Вибраний тип у ItemsList:', value);
     this.selectedFilter = value;
-    // Оновлюємо фільтрацію, використовуючи обидва параметри
     this.petService.filterPets(this.searchText, this.selectedFilter);
+  }
+
+  handleDeletePet(petId: string) {
+    this.petService.deletePet(petId).subscribe({
+      next: () => {
+        console.log(`Вихованець з ID ${petId} успішно видалений.`);
+        this.petService.getItems().subscribe();
+      },
+      error: (err) => {
+        console.error('Помилка при видаленні:', err);
+      }
+    });
   }
 }

@@ -49,3 +49,15 @@
   /*line-height: 1;*/
   font-style: italic;
 }
+
+.delete-btn{
+  margin: 10px 0px 0px 0px;
+  font-size: 18px;
+  cursor: pointer;
+  border: #633d01 2px solid;
+  border-radius: 4px;
+  padding: 5px;
+  background: #623d01;
+  color:  #ffcc5b;
+  width: 100%;
+}
