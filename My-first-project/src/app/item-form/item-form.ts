@@ -43,6 +43,7 @@ export class ItemForm implements OnInit{
       comment: ['', [Validators.required, Validators.maxLength(250)]]
     });
   }
+
   onFileSelected(event: Event): void {
     const input = event.target as HTMLInputElement;
     if (input.files && input.files.length > 0) {
@@ -81,8 +82,7 @@ export class ItemForm implements OnInit{
     }
 
     const newPet: Beast = {
-      // Автоматичне призначення ID
-      id: this.petService.Pet_Card.length,
+      id: undefined as any,
       imageUrl: finalImageUrl,
       name: formValue.name,
       ageNum: formValue.ageNum,
@@ -93,10 +93,25 @@ export class ItemForm implements OnInit{
       diet: formValue.diet,
       sound: formValue.sound,
       imgback: formValue.imgback,
+      comment: formValue.comment || ''
     };
-    const newComment: string = formValue.comment;
 
-    this.petService.addPetAndFilter(newPet, newComment);
-    this.router.navigate(['/items']);
+    this.petService.addPet(newPet)
+      .subscribe({
+        next: (addedPet) => {
+          console.log('Успішно додано вихованця з ID:', addedPet.id);
+          this.petService.getItems().subscribe({
+            next: () => {
+              this.router.navigate(['/items']);
+            },
+            error: (err) => console.error('Помилка оновлення списку після POST:', err)
+          });
+        },
+        error: (err) => {
+          console.error('Помилка при додаванні вихованця:', err);
+          alert('Помилка при додаванні даних. Перевірте роботу json-server.');
+        }
+      });
   }
+
 }

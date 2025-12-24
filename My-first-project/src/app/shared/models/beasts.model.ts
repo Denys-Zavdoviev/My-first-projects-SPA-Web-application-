@@ -23,7 +23,7 @@ export enum beastType {
 }
 
 export interface Beast {
-  id: number; //id
+  id?: string; //id
   name?: string; //ім'я тварини
   ageNum: number; //вік число
   ageYMD: ageType; // рік, місяць, день
@@ -34,4 +34,5 @@ export interface Beast {
   liketoy?: string; // улюбоена іграшка
   diet?: DietType; // хижак, травоїдний, всеїдний
   imgback?: string; // фонове зображення
+  comment?: string;
 }

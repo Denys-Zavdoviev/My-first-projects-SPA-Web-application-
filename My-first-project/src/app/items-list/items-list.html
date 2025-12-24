@@ -8,6 +8,7 @@
 </div>
 <div class="list-cards">
   <app-item-card *ngFor="let pet of filteredPets$ | async"
-                 [pet]="pet">
+                 [pet]="pet"
+                 (deletePet)="handleDeletePet($event)">
   </app-item-card>
 </div>

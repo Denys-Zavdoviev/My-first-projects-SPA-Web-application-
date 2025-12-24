@@ -15,50 +15,33 @@ import { Subscription } from 'rxjs';
   styleUrl: './pet-detail.css',
 })
 export class PetDetail implements OnInit {
-  // @Input() pet!: Beast;
-  // @Input() comment!: string;
-  // @Output() close = new EventEmitter<void>();
-
-  // closeModal() {
-  //   this.close.emit();
-  // }
-
   public pet: Beast | undefined;
-  public comment: string | undefined;
 
   private routeSubscription!: Subscription;
 
   constructor(
-    private route: ActivatedRoute, // Для доступу до параметрів маршруту
-    private petService: PetService, // Для отримання даних
-    private router: Router // Для можливої навігації назад (опціонально)
+    private route: ActivatedRoute,
+    private petService: PetService,
+    private router: Router
   ) {}
 
   ngOnInit(): void {
-    // Підписуємося на параметри маршруту (id)
     this.routeSubscription = this.route.paramMap.subscribe(params => {
       const idString = params.get('id');
-      const petId = idString ? +idString : NaN; // Перетворюємо рядок на число
-
-      if (!isNaN(petId)) {
-        this.petService.getPetById(petId).subscribe(data => {
-          this.pet = data.pet;
-          this.comment = data.comment;
+      if (idString && idString.trim().length > 0) {
+        const petStringId = idString;
+        this.petService.getPetById(petStringId as any).subscribe(data => {
+          this.pet = data;
           if (!this.pet) {
-            console.warn(`[PetDetail] Вихованця з ID: ${petId} не знайдено.`);
-            // Опціонально: перенаправити на список, якщо вихованця не знайдено
-            // this.router.navigate(['/items']);
+            console.warn(`[PetDetail] Вихованця з ID: ${petStringId} не знайдено.`);
           }
         });
       } else {
-        console.error('[PetDetail] Некоректний ID в маршруті.');
-        // Опціонально: перенаправити на список, якщо ID некоректний
-        // this.router.navigate(['/items']);
+        console.error('[PetDetail] Некоректний ID в маршруті (ID відсутній або порожній).');
       }
     });
   }
 
-  // Необов'язкова реалізація ngOnDestroy для очищення підписки
   ngOnDestroy(): void {
     if (this.routeSubscription) {
       this.routeSubscription.unsubscribe();

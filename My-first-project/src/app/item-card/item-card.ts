@@ -1,4 +1,4 @@
-import {Component, Input} from '@angular/core';
+import {Component, Input, Output, EventEmitter} from '@angular/core';
 import {Beast, DietType} from '../shared/models/beasts.model';
 import {NgClass, NgFor, NgIf, NgStyle} from '@angular/common';
 import {RouterLink} from '@angular/router';
@@ -13,5 +13,8 @@ import {HoverCard} from '../directives/hover-card';
 })
 export class ItemCard {
   @Input() pet!: Beast;
-  // @Input() comment!: string;
+  @Output() deletePet = new EventEmitter<string>();
+  onDelete() {
+    this.deletePet.emit(this.pet.id);
+  }
 }
