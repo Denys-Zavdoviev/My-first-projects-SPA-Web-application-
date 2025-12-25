@@ -1,0 +1,46 @@
+<div class="form-container">
+  <h2>Вхід до системи</h2>
+  <form (ngSubmit)="onSubmit()" #loginForm="ngForm" class="pet-form">
+    <div class="form-group">
+      <label for="email">Електронна пошта:</label>
+      <input
+        id="email"
+        type="email"
+        [(ngModel)]="loginData.email"
+        name="email"
+        autocomplete="off"
+        #email="ngModel"
+        required
+        email
+      >
+      <div *ngIf="email.invalid && email.touched" class="error-message">
+        <div *ngIf="email.errors?.['required']">Email обов'язковий для входу.</div>
+        <div *ngIf="email.errors?.['email']">Введіть коректну адресу пошти.</div>
+      </div>
+    </div>
+
+    <div class="form-group">
+      <label for="password">Пароль:</label>
+      <input
+        id="password"
+        type="password"
+        [(ngModel)]="loginData.password"
+        name="password"
+        autocomplete="off"
+        #password="ngModel"
+        required
+        minlength="6"
+      >
+      <div *ngIf="password.invalid && password.touched" class="error-message">
+        <div *ngIf="password.errors?.['required']">Пароль не може бути порожнім.</div>
+        <div *ngIf="password.errors?.['minlength']">Мінімум 6 символів.</div>
+      </div>
+    </div>
+
+    <button type="submit" [disabled]="loginForm.invalid" class="submit-button">Увійти</button>
+
+    <div *ngIf="errorMessage" class="error-banner">
+      {{ errorMessage }}
+    </div>
+  </form>
+</div>
