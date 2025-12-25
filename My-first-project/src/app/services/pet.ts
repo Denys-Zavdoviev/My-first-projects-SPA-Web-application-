@@ -17,7 +17,6 @@ export class PetService {
   private _filteredPetsSubject: BehaviorSubject<Beast[]> = new BehaviorSubject<Beast[]>([]);
   public filteredPets$: Observable<Beast[]> = this._filteredPetsSubject.asObservable();
 
-  // Метод getItems() Новий
   public getItems(): Observable<Beast[]> {
     return this.http.get<Beast[]>(this.apiUrl)
       .pipe(
