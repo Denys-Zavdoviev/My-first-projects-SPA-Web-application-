@@ -42,5 +42,20 @@
       "imgback": "",
       "comment": "Каар! Я надто швидкий для камери."
     }
+  ],
+  "users": [
+    {
+      "id": "1",
+      "name": "Admin",
+      "email": "denys.zavdovyev@student.sumdu.edu.ua",
+      "password": "adminpets123",
+      "role": "admin"
+    },
+    {
+      "id": "fc77",
+      "name": "Денис",
+      "email": "denis.zavdoviev@gmail.com",
+      "password": "denus1234"
+    }
   ]
 }

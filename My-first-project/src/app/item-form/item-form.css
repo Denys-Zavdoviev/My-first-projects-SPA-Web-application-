@@ -1,11 +1,9 @@
-/* Стилізація контейнера форми (імітує картку/фільтр) */
 .form-container {
-  margin: 30px auto; /* Центрування */
+  margin: 30px auto;
   padding: 25px 35px;
   width: 90%;
-  max-width: 700px; /* Обмеження ширини */
+  max-width: 700px;
 
-  /* Стилі як у картки (item-card.css) */
   background-color: #f2d19b;
   border: #633d01 5px solid;
   border-radius: 8px;
@@ -25,7 +23,6 @@
   gap: 15px;
 }
 
-/* Стилізація груп полів */
 .form-group {
   display: flex;
   flex-direction: column;
@@ -37,7 +34,7 @@
 }
 
 .age-input, .age-type-select {
-  flex: 1; /* Рівна ширина для полів віку */
+  flex: 1;
 }
 
 .form-group label {
@@ -47,9 +44,7 @@
   font-weight: bold;
 }
 
-/* Стилізація полів вводу (як у search.css / filter.css) */
-.form-group input[type="text"],
-.form-group input[type="number"],
+.form-group input,
 .form-group select,
 .form-group textarea {
   font-size: 18px;
@@ -57,22 +52,21 @@
   border-radius: 4px;
   padding: 8px 10px;
   cursor: text;
-  background-color: #fff8e8; /* Світліший фон для полів */
+  background-color: #fff8e8;
   transition: border-color 0.3s;
 }
 
 .form-group input:focus,
 .form-group select:focus,
 .form-group textarea:focus {
-  border-color: #ffcc5b; /* Ефект фокусу */
+  border-color: #ffcc5b;
   outline: none;
 }
 
 .form-group textarea {
-  resize: vertical; /* Дозволити лише вертикальну зміну розміру */
+  resize: vertical;
 }
 
-/* Стилізація кнопки submit (як у search.css) */
 .submit-button {
   margin-top: 20px;
   font-size: 20px;
@@ -80,14 +74,14 @@
   border: #633d01 3px solid;
   border-radius: 8px;
   padding: 10px 20px;
-  background: #623d01; /* Колір кнопки */
-  color: #ffcc5b; /* Колір тексту */
+  background: #623d01;
+  color: #ffcc5b;
   font-weight: bold;
   transition: background 0.3s;
 }
 
 .submit-button:hover:not([disabled]) {
-  background: #492b00; /* Затемнення при наведенні (без ефекту тіні) */
+  background: #492b00;
 }
 
 .submit-button[disabled] {
@@ -96,25 +90,22 @@
   opacity: 0.7;
 }
 
-/* Стилі для повідомлень про помилки (error-message) */
 .error-message {
   color: #a00;
   font-size: 14px;
   margin-top: 5px;
 }
 
-/* Стиль для невалідних полів */
 .pet-form input.ng-invalid.ng-touched,
 .pet-form select.ng-invalid.ng-touched,
 .pet-form textarea.ng-invalid.ng-touched {
-  border-color: #a00; /* Червона рамка для невалідних полів */
+  border-color: #a00;
 }
 
-/* Стилізація попереднього перегляду */
 .image-preview {
   margin-top: 15px;
   padding: 15px;
-  background-color: #f7e9c5; /* Трохи світліший фон */
+  background-color: #f7e9c5;
   border: #633d01 2px dashed;
   border-radius: 4px;
   display: flex;
@@ -129,9 +120,8 @@
   border: 1px solid #633d01;
 }
 
-/* Стиль для кнопки очищення (використовуємо submit-button стилі) */
 .clear-button {
-  background: #a00; /* Червоний колір для кнопки очищення */
+  background: #a00;
   color: #fff8e8;
   border-color: #800;
   width: 50%;

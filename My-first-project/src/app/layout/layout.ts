@@ -22,6 +22,6 @@ interface NavItem {
 export class Layout {
   public list_nav: NavItem[] = [
     { label: "Головна", route: "/items" },
-    { label: "Новий Друг", route: "/add-item" }
+    // { label: "Новий Друг", route: "/add-item" }
   ];
 }

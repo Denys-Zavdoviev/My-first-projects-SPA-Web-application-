@@ -1,0 +1,67 @@
+<div class="form-container">
+  <h2>Створити профіль</h2>
+
+  <form (ngSubmit)="onSubmit()" #registerForm="ngForm" class="pet-form">
+
+    <div class="form-group">
+      <label for="name">Ім'я користувача:</label>
+      <input
+        id="name"
+        type="text"
+        [(ngModel)]="userData.name"
+        name="name"
+        autocomplete="off"
+        #userName="ngModel"
+        required
+        minlength="2"
+      >
+      <div *ngIf="userName.invalid && userName.touched" class="error-message">
+        <div *ngIf="userName.errors?.['required']">Ім'я обов'язкове.</div>
+        <div *ngIf="userName.errors?.['minlength']">Мінімум 2 символи.</div>
+      </div>
+    </div>
+
+    <div class="form-group">
+      <label for="reg-email">Електронна пошта:</label>
+      <input
+        id="reg-email"
+        type="email"
+        autocomplete="off"
+        [(ngModel)]="userData.email"
+        name="email"
+        #regEmail="ngModel"
+        required
+        email
+      >
+      <div *ngIf="regEmail.invalid && regEmail.touched" class="error-message">
+        <div *ngIf="regEmail.errors?.['required']">Електронна пошта обов'язкова.</div>
+        <div *ngIf="regEmail.errors?.['email']">Введіть валідний формат.</div>
+      </div>
+    </div>
+
+    <div class="form-group">
+      <label for="reg-password">Пароль:</label>
+      <input
+        id="reg-password"
+        type="password"
+        [(ngModel)]="userData.password"
+        name="password"
+        autocomplete="off"
+        #regPass="ngModel"
+        required
+        minlength="6"
+      >
+      <div *ngIf="regPass.invalid && regPass.touched" class="error-message">
+        <div *ngIf="regPass.errors?.['required']">Придумайте пароль.</div>
+        <div *ngIf="regPass.errors?.['minlength']">Пароль має бути від 6 символів.</div>
+      </div>
+    </div>
+
+    <button type="submit" [disabled]="registerForm.invalid" class="submit-button">
+      Зареєструватися
+    </button>
+    <div *ngIf="errorMessage" class="error-banner">
+      {{ errorMessage }}
+    </div>
+  </form>
+</div>

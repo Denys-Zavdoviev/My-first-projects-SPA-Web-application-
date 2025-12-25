@@ -7,10 +7,15 @@ export class BaseUrlInterceptor implements HttpInterceptor {
   private baseUrl = 'http://localhost:3000/';
 
   intercept(req: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
-    if (req.url.startsWith('http')) {
-      return next.handle(req);
+    const token = localStorage.getItem('token');
+    const url = req.url.startsWith('http') ? req.url : `${this.baseUrl}${req.url}`;
+
+    const headers: any = {};
+    if (token) {
+      headers['Authorization'] = `Bearer ${token}`;
     }
-    const apiReq = req.clone({ url: `${this.baseUrl}${req.url}` });
+
+    const apiReq = req.clone({url: url, setHeaders: headers});
     return next.handle(apiReq);
   }
 }
