@@ -28,7 +28,6 @@ export class PetService {
         catchError(this.handleError));
   }
 
-  // Новий
   public getPetById(id: number): Observable<Beast> {
     const headers = new HttpHeaders({
       'Cache-Control': 'no-cache, no-store, must-revalidate'
@@ -38,16 +37,13 @@ export class PetService {
         catchError(this.handleError));
   }
 
-  // Метод для фільтрації
   public filterPets(searchText: string, filterType: string): void {
     let petsToFilter = this.allPets;
 
-    // Фільтрація за типом (якщо не 'Всі')
     if (filterType !== 'Всі') {
       petsToFilter = petsToFilter.filter(beast => beast.type === filterType);
     }
 
-    // Фільтрація за текстом пошуку
     if (searchText && searchText.trim() !== '') {
       const lowerCaseSearchText = searchText.toLowerCase().trim();
       petsToFilter = petsToFilter.filter(beast => {
@@ -59,7 +55,6 @@ export class PetService {
           (beast.liketoy ?? '').toLowerCase().includes(lowerCaseSearchText) ||
           (beast.diet ?? '').toLowerCase().includes(lowerCaseSearchText) ||
           (beast.sound ?? '').toLowerCase().includes(lowerCaseSearchText) ||
-          // (beast.comment ?? '').toLowerCase().includes(lowerCaseSearchText) ||
           comment.toLowerCase().includes(lowerCaseSearchText)
         );
       });
@@ -91,8 +86,8 @@ export class PetService {
     return throwError(() => new Error(errorMessage));
   }
   public deletePet(id: string): Observable<any> {
-    const url = `${this.apiUrl}/${id}`; // URL: http://localhost:3000/pets/ID
-    return this.http.delete(url) // Використовуємо метод DELETE
+    const url = `${this.apiUrl}/${id}`;
+    return this.http.delete(url)
       .pipe(
         catchError(this.handleError)
       );

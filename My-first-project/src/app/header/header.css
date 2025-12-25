@@ -39,18 +39,19 @@
   flex-direction: row;
   flex-wrap: wrap;
   align-items: center;
+  justify-content: space-between;
   gap: 10px;
   color: #633d01;
   padding: 10px 25px;
   background: #f4d39c;
 }
 .list-nav{
-  width: 60%;
+  width: 30%;
   display: flex;
   flex-direction: row;
   flex-wrap: wrap;
-  align-items: center;
-  justify-content: space-around;
+  align-items: flex-start;
+  /*justify-content: space-around;*/
 }
 .list-nav a, .log a{
   text-decoration:none;

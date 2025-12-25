@@ -16,7 +16,20 @@ export class AuthService {
   constructor(private http: HttpClient) {}
 
   register(user: any): Observable<any> {
-    return this.http.post(`${this.apiUrl}/users`, user);
+    return this.http.get<any[]>(`${this.apiUrl}/users`).pipe(
+      map((users) => {
+        const nameExists = users.some(u => u.name.toLowerCase() === user.name.toLowerCase());
+        const emailExists = users.some(u => u.email.toLowerCase() === user.email.toLowerCase());
+        if (nameExists) {
+          throw new Error('NameAlreadyExists');
+        }
+        if (emailExists) {
+          throw new Error('EmailAlreadyExists');
+        }
+        return true;
+      }),
+      switchMap(() => this.http.post(`${this.apiUrl}/users`, user))
+    );
   }
 
   login(credentials: any): Observable<any> {

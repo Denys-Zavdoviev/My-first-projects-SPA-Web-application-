@@ -23,7 +23,17 @@ export class Register {
         this.router.navigate(['/login']);
       },
       error: (err) => {
-        this.errorMessage ='Помилка реєстрації';
+        switch (err.message) {
+          case 'NameAlreadyExists':
+            this.errorMessage = 'Це ім’я вже зайняте. Оберіть інше.';
+            break;
+          case 'EmailAlreadyExists':
+            this.errorMessage = 'Користувач із такою поштою вже зареєстрований.';
+            break;
+          default:
+            this.errorMessage = 'Помилка реєстрації. Спробуйте пізніше.';
+            break;
+        }
       }
     });
   }
