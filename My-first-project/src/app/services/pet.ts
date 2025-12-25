@@ -27,7 +27,7 @@ export class PetService {
         catchError(this.handleError));
   }
 
-  public getPetById(id: number): Observable<Beast> {
+  public getPetById(id: string): Observable<Beast> {
     const headers = new HttpHeaders({
       'Cache-Control': 'no-cache, no-store, must-revalidate'
     });
